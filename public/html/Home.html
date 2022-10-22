@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="home">
+                <a href ="" >
+                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
+                </a>
+            </div>
+            <div class ="filter">
+
+            </div>
+            <div class="shop">
+                <a href ="" >
+                    <img class = "cart" src="/ressources/Cart.png" alt="cart"></img>
+                </a>
+            </div>
+
+            <div class="profile">
+                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
+            </div>
+
+        </div>
+        </nav>
+
+    </header>
+    <section>
+    </section>
+    <script>
+        
+       const Account = document.querySelector('.account');
+        Account.addEventListener('click', () => {
+            const url =  window.location;
+            console.log(url)
+            const U = url.pathname.split('/').slice(3,5);
+            console.log(U)
+            link = '/api/client/' + U[0] + '/'+ U[1] + '/Profile.html';
+            location.href = link;
+        });
+
+    </script>
+    <footer></footer>
+</body>
+</html>

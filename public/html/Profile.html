@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login page</title>
+</head>
+<body onload="Info()">
+    <header>
+        <nav>
+            <div class="home">
+                <a href ="" >
+                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
+                </a>
+            </div>
+            <div class ="filter">
+
+            </div>
+            <div class="shop">
+                <a href ="" >
+                    <img class = "cart" src="/ressources/Cart.png" alt="cart"></img>
+                </a>
+            </div>
+
+            <div class="profile">
+                <a href ="Profile.html" >
+                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
+                </a>
+            </div>
+            
+        </nav>
+
+    </header>
+    <section>
+        <div class = "card-container">
+            <div class="card">
+                <div class = "login-header">
+                    <h1>My Profile</h1>
+                </div>
+                <div class = "login-body">
+                    <form name="inscription" onsubmit="return false" action="#" method="post">
+                        <div class="case">
+                            <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname">
+                        </div>
+                        <div class="case">
+                            <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname">
+                        </div>
+                        <div class="case">
+                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email">
+                        </div>
+                        <div class="case">
+                            <input type="password" class="password" required placeholder="Password" id="password" name="password">
+                        </div>
+                    </form>
+                    <div class = "sign-button">
+                        <p class="update">Update</p>
+                    </div>
+                    <br>
+                    <div class = "sign-button">
+                        <p class = "delete">Delete</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+    function Info(){
+        const url =  window.location;
+        console.log(url)
+        const U = url.pathname.split('/').slice(3,5);
+        console.log(U)
+        var mail = document.getElementById("mail");
+        var password= document.getElementById("password");
+        mail.value = U[0];
+        password.value = U[1];
+       
+    }
+
+    const btnDelete = document.querySelector('.sign-button .delete')
+    const btnUpdate= document.querySelector('.sign-button .update')
+
+        btnDelete.addEventListener('click', () => { 
+            DeleteUserInfo();
+            
+        });
+
+        btnUpdate.addEventListener('click', () => { 
+            UpdateUserInfo();
+        });
+
+        function UpdateUserInfo(){
+            const firstname = document.querySelector('.case .firstname').value
+            const lastname = document.querySelector('.case .lastname').value
+            const email = document.querySelector('.case .email').value
+            const password = document.querySelector('.case .password').value
+            console.log(email);
+            console.log(password);
+            console.log(lastname);
+            console.log(firstname);
+            link = '/api/client/UpdateUser/' + lastname + '/' + firstname +'/' + email + '/' + password;
+            console.log(link)
+            location.href = link;
+        }
+
+        function DeleteUserInfo(){
+
+            const email = document.querySelector('.case .email').value
+            const password = document.querySelector('.case .password').value
+            console.log(email);
+            console.log(password);
+            console.log(lastname);
+            console.log(firstname);
+            link = '/api/client/DeleteClient/' +  email + '/' + password;
+            console.log(link)
+            location.href = link;
+        }
+            
+            
+    </script>
+    <footer></footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="home">
+                <a href ="" >
+                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
+                </a>
+            </div>
+            <div class ="filter">
+
+            </div>
+            <div class="shop">
+                <a href ="" >
+                    <img class = "cart" src="/ressources/Cart.png" alt="cart"></img>
+                </a>
+            </div>
+        </nav>
+
+    </header>
+    <section>
+        <div class = "card-container">
+            <div class="card">
+                <div class = "login-header">
+                    <h1>Sign In</h1>
+                </div>
+                <div class = "login-body">
+                    <form name="inscription" onsubmit="return false" action="#" method="post">
+                        <div class="case">
+                            <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname">
+                        </div>
+                        <div class="case">
+                            <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname">
+                        </div>
+                        <div class="case">
+                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email">
+                        </div>
+                        <div class="case">
+                            <input type="password" class="password" required placeholder="Password" id="password" name="password">
+                        </div>
+                    </form>
+                    <div class = "sign-button">
+                        <p>Create Account</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+    
+    const btnCreate = document.querySelector('.sign-button')
+        btnCreate.addEventListener('click', () => { 
+            User(event);
+        });
+        function User(e){
+            var mail = document.getElementById("mail").value; 
+            var password = document.getElementById("password").value; 
+            var ln = document.getElementById("lastname").value; 
+            var fn = document.getElementById("firstname").value; 
+            if (mail == "" | password == "" | ln== ""| fn== "") {
+                e.preventDefault();
+                alert("Fill all the field");
+                }
+            else{
+                getUserInfo();
+            }
+        }
+        
+        function getUserInfo(){
+            const firstname = document.querySelector('.case .firstname').value
+            const lastname = document.querySelector('.case .lastname').value
+            const email = document.querySelector('.case .email').value
+            const password = document.querySelector('.case .password').value
+            console.log(email);
+            console.log(password);
+            console.log(lastname);
+            console.log(firstname);
+            console.log("heheha")
+            link = '/api/client/CreateUser/' + email + '/' + password + '/' +  lastname + '/' + firstname;
+            console.log(link)
+            location.href = link;
+        }
+            
+            
+    </script>
+    <footer></footer>
+</body>
+</html>
