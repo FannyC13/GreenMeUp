@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap%27');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    /*background: url(../ressources/login_background_white);*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+}
+
+section{
+    display: flex;
+}
+
+.card-container{
+    margin: auto;
+    width: 380px;
+}
+
+.card{
+    border: 1px solid black;
+    background-color: rgb(232, 224, 224);
+    border-radius: 30px;
+    border: none;
+    padding: 35px;
+    margin: 50% 0%;
+}
+
+.login-header{
+    text-align: center;
+    padding-bottom: 40px;
+    font-size: 25px;
+}
+
+.login-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.case{
+    padding: 8px 0px;
+    margin: auto;
+}
+
+form{
+    width: 100%;
+    padding-bottom: 8px;
+
+}
+
+input{
+    font-size: 17px;
+    border-radius: 10px;
+    border: 1.5px solid rgb(209, 216, 209);
+    width: 92%;
+    padding: 12px;
+}
+
+.sign-button{
+    text-align: center;
+    width: 30%;
+    font-size: 17px;
+    background-color: #6DBF6A;
+    border-radius: 10px;
+}
+
+.sign-button:hover{
+    cursor: pointer;
+    background-color: #5bac58;
+}
+
+.sign-button p{
+    padding: 8px 0;
+    color: white;
+}
+
+
+.login-footer{
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.login-footer a:link, .login-footer :visited{
+    text-decoration: none;
+    color: #6DBF6A
+
+}
+
+/* ------------------- HEADER ---------------------- */
+
+
+nav{
+    display: flex;
+    flex-direction: row;
+    background-color: #6DBF6A;
+    width: 100%;
+}
+
+.home img{
+    height: 100px;
+    margin-top: -15%;
+    margin-left: -10%;
+}
+
+.shop{
+    position: absolute;
+    right: 2%;
+}
+
+.shop img{
+    height: 55px;
+    margin-top: 15%;
+
+}
+
+
+.account{
+    width: 50px;
+    position: absolute;
+    right: 7%;
+    top: 2%;
+}
