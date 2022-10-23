@@ -18,9 +18,9 @@ CREATE TABLE Plants(
 CREATE TABLE Sell(
    IDSell VARCHAR(50),
    DateS DATE NOT NULL,
-   IDClient VARCHAR(50),
+   Mail VARCHAR(50),
    IDProduct VARCHAR(50) NOT NULL,
    PRIMARY KEY(IDSell),
-   FOREIGN KEY(IDClient) REFERENCES Client(IDClient),
+   FOREIGN KEY(Mail) REFERENCES Client(Mail),
    FOREIGN KEY(IDProduct) REFERENCES Plants(IDProduct),
 );

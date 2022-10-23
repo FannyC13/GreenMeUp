@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../database');
-var alert = require('alert');
-const queries = require('./queries')
-var data = null;
+const queries = require('../../js/queries')
+const path = require('path')
+
+
+
 router.get('/', function(req,res){
     db.select().from('client').orderBy('mail').then(function(data){
         res.send(data);
@@ -16,7 +18,7 @@ router.get('/CreateUser/:mail/:password/:lastname/:firstname',function(req,res){
     create.then(user => {
             if(user.status === "success"){
                 //res.send(user.data)
-                res.sendFile('Login.html', { root: "/Users/Moi/Documents/EFREI Course/L3/S6-International Semester/Advanced Web Prog/Plants/KnexDB/public/html/"});
+                res.sendFile('Login.html', { root: path.join(__dirname, '../../public/html/')});
                
             }else{
                 res.json(user)
@@ -24,11 +26,11 @@ router.get('/CreateUser/:mail/:password/:lastname/:firstname',function(req,res){
     })})
 
 router.get('/:mail/:password/Home.html',function(req,res){
-        res.sendFile('Home.html', { root: "/Users/Moi/Documents/EFREI Course/L3/S6-International Semester/Advanced Web Prog/Plants/KnexDB/public/html/"});
+        res.sendFile('Home.html', { root: path.join(__dirname, '../../public/html/')});
 })
 
 router.get('/:mail/:password/Profile.html',function(req,res){
-    res.sendFile('Profile.html', { root: "/Users/Moi/Documents/EFREI Course/L3/S6-International Semester/Advanced Web Prog/Plants/KnexDB/public/html/"});
+    res.sendFile('Profile.html', { root: path.join(__dirname, '../../public/html/')});
 })
 
 router.patch('/:mail', function(req,res){
@@ -77,4 +79,3 @@ router.get('/:mail', function(req,res){
 })
 
 module.exports = router;
-exports.data = data;
