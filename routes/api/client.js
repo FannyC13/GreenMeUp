@@ -38,7 +38,7 @@ router.get('/:mail/:password/Profile.html',function(req,res){
     const User = clients.SearchUser(req.params.mail, req.params.password)
     User.then(user => {
         if(user.status === "success"){
-            res.render('Profile', {User : (user.data)[0]});
+            res.render('Profile', {user : (user.data)[0]});
         }else{
             res.json(user)
         }
@@ -46,7 +46,7 @@ router.get('/:mail/:password/Profile.html',function(req,res){
 })
 
 router.patch('/:mail', function(req,res){
-    db('client').where({mail: req.params.mail}).update(req.body).returning('*').then(function(data){
+    db('client').where({mail: req.params.mail}).update(req.body).then(function(data){
         res.send(data);
     });
 
@@ -86,7 +86,7 @@ router.get('/DeleteClient/:mail/:password', function(req,res){
 
 
 router.get('/:mail', function(req,res){
-    db('client').where({mail: req.params.mail}).returning('*').then(function(data){
+    db('client').where({mail: req.params.mail}).then(function(data){
         res.send(data);
     });
 

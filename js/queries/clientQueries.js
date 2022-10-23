@@ -2,7 +2,7 @@ const db = require('../../database');
 
 const createUser = async (lastname,firstname,mail,password) => {
     try{
-      const create = await db('client').insert({lastname:lastname, firstname:firstname, password: password, mail: mail}).returning('*');
+      const create = await db('clients').insert({lastname:lastname, firstname:firstname, password: password, mail: mail});
       console.log(create)
       respObj = {
         status: "success",
@@ -23,12 +23,12 @@ const createUser = async (lastname,firstname,mail,password) => {
 
 const updateUser = async (lastname,firstname,mail,password)  =>{
     try{
-    const update = await db('client').where({mail: mail}).update({
+    const update = await db('clients').where({mail: mail}).update({
         lastname:lastname,
         firstname: firstname,
         password:password,
         mail: mail,
-        }).returning('*')
+        })
         if(Object.keys(update).length != 0){
         return {
                 status: "success",
@@ -45,7 +45,7 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
     
   const DeleteUser = async (mail,password) => {
     try{
-      const del = await db('client').where({password: password, mail: mail}).del();
+      const del = await db('clients').where({password: password, mail: mail}).del();
       console.log(del)
       respObj = {
         status: "success",
@@ -64,7 +64,7 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
 
   const SearchUser = async (mail,password) => {
     try{
-      const search = await db('client').where({password: password}).where({mail: mail}).select();
+      const search = await db('clients').where({password: password, mail: mail}).select();
       if(Object.keys(search).length != 0){
         return {
                 status: "success",
@@ -77,7 +77,7 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
       console.log(e)
       return {   
         status: "failed",
-        data: "Usqqqer not Found"
+        data: "User not Found"
       }
     }
       
