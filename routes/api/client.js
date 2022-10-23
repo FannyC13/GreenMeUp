@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../database');
-const queries = require('../../js/queries')
+const queries = require('../../js/queries/clientQueries')
 const path = require('path')
 
 
