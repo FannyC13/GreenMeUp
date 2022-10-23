@@ -4,6 +4,7 @@ const db = require('../../database');
 const clients = require('../../js/queries/clientQueries')
 const plantsQuery = require('../../js/queries/plantsQueries')
 const path = require('path')
+const bcrypt = require('bcrypt');
 
 router.get('/', function(req,res){
     db.select().from('client').orderBy('mail').then(function(data){
@@ -11,18 +12,23 @@ router.get('/', function(req,res){
 });
 });
 
-
-router.get('/CreateUser/:mail/:password/:lastname/:firstname',function(req,res){
-    const create = clients.createUser(req.params.lastname, req.params.firstname,  req.params.mail,req.params.password)
-    create.then(user => {
+router.get('/CreateUser/:mail/:password/:lastname/:firstname', async (req,res) =>{
+    try{
+        const hashedPasswords = await bcrypt.hash(req.params.password, 10)
+        const create = clients.createUser(req.params.lastname, req.params.firstname,  req.params.mail,hashedPasswords)
+        create.then(user => {
             if(user.status === "success"){
                 //res.send(user.data)
-                res.sendFile('Login.html', { root: path.join(dirname, '../../public/html/')});
+                res.sendFile('Login.html', { root: path.join(__dirname, '../../public/html/')});
 
             }else{
                 res.json(user)
             }
-    })})
+        })
+    }catch{
+        res.status(500).send()
+    }
+    })
 
 router.get('/:mail/:password/Home.html',function(req,res){
         res.sendFile('Home.html', { root: path.join(dirname, '../../public/html/')});
@@ -54,6 +60,7 @@ router.get('/UpdateUser/:lastname/:firstname/:mail/:password/', function(req,res
     })
 })
 router.get('/:mail/:password', function(req,res){
+    
     const Login = clients.SearchUser(req.params.mail,req.params.password);
     const select = plantsQuery.selectAllPlants();
     Login.then(user => {
