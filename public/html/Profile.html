@@ -69,11 +69,7 @@
     <script>
     function Info(){
         const url =  window.location;
-        console.log(url)
         const U = url.pathname.split('/').slice(3,5);
-        console.log(U)
-        var firstname = document;
-        var lastname = document;
         var mail = document.getElementById("mail");
         var password = document.getElementById("password");
         mail.value = U[0];
@@ -98,12 +94,7 @@
             const lastname = document.querySelector('.case .lastname').value
             const email = document.querySelector('.case .email').value
             const password = document.querySelector('.case .password').value
-            console.log(email);
-            console.log(password);
-            console.log(lastname);
-            console.log(firstname);
             link = '/api/client/UpdateUser/' + lastname + '/' + firstname +'/' + email + '/' + password;
-            console.log(link)
             location.href = link;
         }
 
@@ -111,12 +102,7 @@
 
             const email = document.querySelector('.case .email').value
             const password = document.querySelector('.case .password').value
-            console.log(email);
-            console.log(password);
-            console.log(lastname);
-            console.log(firstname);
             link = '/api/client/DeleteClient/' +  email + '/' + password;
-            console.log(link)
             location.href = link;
         }
             

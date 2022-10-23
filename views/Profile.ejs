@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/login.css">
     <title>Login page</title>
 </head>
-<body onload="Info()">
+<body>
     <header>
         <nav>
             <div class="home">
@@ -42,16 +42,16 @@
                 <div class = "login-body">
                     <form name="inscription" onsubmit="return false" action="#" method="post">
                         <div class="case">
-                            <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname">
+                            <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname" value="<%- User.Firstname %>">
                         </div>
                         <div class="case">
-                            <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname">
+                            <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname" value="<%- User.Lastname %>">
                         </div>
                         <div class="case">
-                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email">
+                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email" value="<%- User.Mail %>">
                         </div>
                         <div class="case">
-                            <input type="password" class="password" required placeholder="Password" id="password" name="password">
+                            <input type="password" class="password" required placeholder="Password" id="password" name="password" value="<%- User.password %>">
                         </div>
                     </form>
                     <div class = "sign-button">
@@ -67,19 +67,6 @@
         </div>
     </section>
     <script>
-    function Info(){
-        const url =  window.location;
-        console.log(url)
-        const U = url.pathname.split('/').slice(3,5);
-        console.log(U)
-        var firstname = document;
-        var lastname = document;
-        var mail = document.getElementById("mail");
-        var password = document.getElementById("password");
-        mail.value = U[0];
-        password.value = U[1];
-       
-    }
 
     const btnDelete = document.querySelector('.sign-button .delete')
     const btnUpdate= document.querySelector('.sign-button .update')
