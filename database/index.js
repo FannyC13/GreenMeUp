@@ -3,8 +3,8 @@ const knex = require('knex')({
     connection:{
         host:'localhost',
         database:'greenmeup',
-        user: 'Julian',
-        password: 'password',
+        user: 'lucas',
+        password: 'admin',
     }
 });
 

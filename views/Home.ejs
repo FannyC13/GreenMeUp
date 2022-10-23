@@ -32,19 +32,24 @@
         </nav>
 
     </header>
+    <section class = "display">
 
-    <%-Lastname %>
-    <%-Firstname %>
-    <section>
+        <%- client.Firstname %> 
+        <% plants.forEach(function(plant) { %>
+            <div class="plant">
+                <p><%= plant.Description %></p>
+            </div>
+        <% }) %> 
     </section>
+
+
     <script>
+
 
        const Account = document.querySelector('.account');
         Account.addEventListener('click', () => {
             const url =  window.location;
-            console.log(url)
             const U = url.pathname.split('/').slice(3,5);
-            console.log(U)
             link = '/api/client/' + U[0] + '/'+ U[1] + '/Profile.html';
             location.href = link;
         });

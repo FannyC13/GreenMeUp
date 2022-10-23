@@ -66,8 +66,7 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
 
   const SearchUser = async (mail,password) => {
     try{
-      const search = await db('client').where({password: password}).where({mail: mail}).select().returning('*');
-      console.log(search)
+      const search = await db('client').where({password: password}).where({mail: mail}).select();
       if(Object.keys(search).length != 0){
         return {
                 status: "success",
@@ -77,9 +76,10 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
             throw new Error("User not found");
         }
     }catch(e){
-      return {
+      console.log(e)
+      return {   
         status: "failed",
-        data: "User not Found"
+        data: "Usqqqer not Found"
       }
     }
       
