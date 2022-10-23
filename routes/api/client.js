@@ -15,11 +15,11 @@ router.get('/', function(req,res){
 
 router.get('/CreateUser/:mail/:password/:lastname/:firstname',function(req,res){
     const create = queries.createUser(req.params.lastname, req.params.firstname,  req.params.mail,req.params.password)
+    const data = {lastname: req.params.lastname, firstname: req.params.firstname, email: req.params.email, password: req.params.password}
     create.then(user => {
             if(user.status === "success"){
                 //res.send(user.data)
-                res.sendFile('Login.html', { root: path.join(__dirname, '../../public/html/')});
-               
+                res.render('Profile', data);
             }else{
                 res.json(user)
             }

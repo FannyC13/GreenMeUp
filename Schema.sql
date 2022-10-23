@@ -2,7 +2,8 @@ CREATE TABLE Client(
    Lastname VARCHAR(50) NOT NULL,
    Firstname VARCHAR(50) NOT NULL,
    Mail VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Mail)
+   PRIMARY KEY(Mail), 
+   password varchar(45) not null
 );
 
 CREATE TABLE Plants(
@@ -22,5 +23,4 @@ CREATE TABLE Sell(
    IDProduct VARCHAR(50) NOT NULL,
    PRIMARY KEY(IDSell),
    FOREIGN KEY(Mail) REFERENCES Client(Mail),
-   FOREIGN KEY(IDProduct) REFERENCES Plants(IDProduct),
-);
+   FOREIGN KEY(IDProduct) REFERENCES Plants(IDProduct));

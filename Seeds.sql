@@ -1,9 +1,10 @@
-INSERT INTO client (Lastname, Firstname, Mail) VALUES 
-('Machard', 'Paul', 'pmachard@gmail.com'),
-('Le', 'Julian', 'julian.le@efrei.net'),
-('Billebaut', 'Arthur', 'arthur.billebaut2@gmail.com'), 
-( 'Brancolini','Lucas', 'lucas.brancolini@gmail.com'), 
-('Chang', 'Fanny', 'fanny.chang@gmail.com');
+INSERT INTO client (Lastname, Firstname, Mail, password) VALUES 
+('Machard', 'Paul', 'pmachard@gmail.com', 'tennis94'),
+('Le', 'Julian', 'julian.le@efrei.net', 'Guluff'),
+('Billebaut', 'Arthur', 'arthur.billebaut2@gmail.com', 'ArthB'), 
+( 'Brancolini','Lucas', 'lucas.brancolini@gmail.com', 'Nox'), 
+( 'Trappeurs','Nox', 'nox.mignon@gmail.com', 'nox123'), 
+('Chang', 'Fanny', 'fanny.chang@gmail.com', 'Fanny');
 
 INSERT INTO plants (IDProduct, Price, Type, Stock, Description) VALUES
 ('Orch_Phal', '50', 'Orchid', '8', 'Moth orchid (Phalaenopsis)'),
