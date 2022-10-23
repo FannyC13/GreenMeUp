@@ -1,26 +1,16 @@
-CREATE TABLE Client(
-   Lastname VARCHAR(50) NOT NULL,
-   Firstname VARCHAR(50) NOT NULL,
-   Mail VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Mail), 
-   password varchar(45) not null
-);
+CREATE TABLE greenmeup.clients (
+  mail VARCHAR(50) NOT NULL,
+  password VARCHAR(100) NULL,
+  lastname VARCHAR(50) NULL,
+  firstname VARCHAR(50) NULL,
+  PRIMARY KEY (mail));
 
-CREATE TABLE Plants(
-   IDProduct VARCHAR(50),
-   Price INT NOT NULL,
-   Type VARCHAR(50) NOT NULL,
-   Stock INT NOT NULL,
-   Description VARCHAR(50) NOT NULL,
-   PRIMARY KEY(IDProduct)
-);
-
-
-CREATE TABLE Sell(
-   IDSell VARCHAR(50),
-   DateS DATE NOT NULL,
-   Mail VARCHAR(50),
-   IDProduct VARCHAR(50) NOT NULL,
-   PRIMARY KEY(IDSell),
-   FOREIGN KEY(Mail) REFERENCES Client(Mail),
-   FOREIGN KEY(IDProduct) REFERENCES Plants(IDProduct));
+CREATE TABLE greenmeup.plants (
+  idplants INT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  price DOUBLE NOT NULL,
+  description MEDIUMTEXT NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  stock INT NOT NULL,
+  PRIMARY KEY (idplants),
+  UNIQUE INDEX name_UNIQUE (name ASC) VISIBLE);

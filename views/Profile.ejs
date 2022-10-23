@@ -42,16 +42,16 @@
                 <div class = "login-body">
                     <form name="inscription" onsubmit="return false" action="#" method="post">
                         <div class="case">
-                            <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname" value="<%- User.Firstname %>">
+                            <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname" value="<%- user.firstname %>">
                         </div>
                         <div class="case">
-                            <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname" value="<%- User.Lastname %>">
+                            <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname" value="<%- user.lastname %>">
                         </div>
                         <div class="case">
-                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email" value="<%- User.Mail %>">
+                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email" value="<%- user.mail %>">
                         </div>
                         <div class="case">
-                            <input type="password" class="password" required placeholder="Password" id="password" name="password" value="<%- User.password %>">
+                            <input type="password" class="password" required placeholder="Password" id="password" name="password" value="<%- user.password %>">
                         </div>
                     </form>
                     <div class = "sign-button">
@@ -85,12 +85,7 @@
             const lastname = document.querySelector('.case .lastname').value
             const email = document.querySelector('.case .email').value
             const password = document.querySelector('.case .password').value
-            console.log(email);
-            console.log(password);
-            console.log(lastname);
-            console.log(firstname);
             link = '/api/client/UpdateUser/' + lastname + '/' + firstname +'/' + email + '/' + password;
-            console.log(link)
             location.href = link;
         }
 
@@ -98,12 +93,7 @@
 
             const email = document.querySelector('.case .email').value
             const password = document.querySelector('.case .password').value
-            console.log(email);
-            console.log(password);
-            console.log(lastname);
-            console.log(firstname);
             link = '/api/client/DeleteClient/' +  email + '/' + password;
-            console.log(link)
             location.href = link;
         }
             

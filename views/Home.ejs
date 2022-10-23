@@ -33,17 +33,52 @@
 
     </header>
     <section class = "display">
-
-        <%- client.Firstname %> 
-        <% plants.forEach(function(plant) { %>
-            <div class="plant">
-                <p><%= plant.Description %></p>
-            </div>
-        <% }) %> 
+        <div id="app">
+                <div v-for="(image, index) in images">
+                    <div class="plant">
+                        <img v-bind:src="path + image">
+                        <p>{{prices[index]}}</p>
+                    </div>
+                </div>  
+        </div>
+            
+            
     </section>
 
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+      </script>
+
+      <script type="module">
+        import { createApp } from 'vue'
+    
+        createApp({
+        data() {
+            return {
+                path: "/ressources/",
+                images: ['img1.jpg','img2.jpg','img3.png','img4.png'],
+                prices: [],
+            }
+          },
+        methods: {
+            initializePrices(){
+                "<% plants.forEach(plant => { %>"
+                 this.prices.push("<%= plant.price %>$")
+                "<% }); %>"
+            }
+        },
+        beforeMount(){
+            this.initializePrices()
+        }
+        }).mount('#app')
+      </script>
 
     <script>
+
 
 
        const Account = document.querySelector('.account');
