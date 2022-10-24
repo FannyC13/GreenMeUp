@@ -27,21 +27,17 @@ router.post('/createUser', async (req,res) =>{
             }else{
                 res.json(user)
             }
-        })
-    }catch{
-        res.status(500).send()
-    }
-})
-
-router.get('/:mail/:password/Home.html',function(req,res){
-        res.sendFile('Home.html', { root: path.join(dirname, '../../public/html/')});
-})
+        }
+        )}catch{
+            res.status(500).send()
+        }
+    })
 
 router.get('/:mail/:password/Profile.html',function(req,res){
     const User = clients.SearchUser(req.params.mail, req.params.password)
     User.then(user => {
         if(user.status === "success"){
-            res.render('Profile', {user : (user.data)[0]});
+            res.render('Profile', user.data[0]);
         }else{
             res.json(user)
         }
@@ -50,18 +46,17 @@ router.get('/:mail/:password/Profile.html',function(req,res){
 
 
 
-router.patch('/:mail', function(req,res){
-    db('client').where({mail: req.params.mail}).update(req.body).then(function(data){
-        res.send(data);
-    });
-
-})
 //put is idempotent so you are editing the actual data
 
 router.get('/UpdateUser/:lastname/:firstname/:mail/:password/', function(req,res){
     const update = clients.updateUser(req.params.lastname, req.params.firstname, req.params.mail,req.params.password);
     update.then(user =>{
-        res.send(user.data)
+        if(user.success === true){
+            res.render('Profile', user.data)
+        }else{
+            res.send("Error 404 not found")
+        }
+        
     })
 })
 
@@ -77,7 +72,7 @@ router.post('/', function(req,res){
                 });
 
         }else{
-            res.json(user)
+            res.redirect('/')
         }
     } )
 })
@@ -85,17 +80,10 @@ router.post('/', function(req,res){
 
 router.get('/DeleteClient/:mail/:password', function(req,res){
     const del = clients.DeleteUser( req.params.mail, req.params.password)
-    del.then(user =>{
-        res.send(user.status)
+    del.then(() =>{
+        res.redirect('/')
     })
 })
 
-
-router.get('/:mail', function(req,res){
-    db('client').where({mail: req.params.mail}).then(function(data){
-        res.send(data);
-    });
-
-})
 
 module.exports = router;
