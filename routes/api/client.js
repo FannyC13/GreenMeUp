@@ -19,9 +19,7 @@ router.post('/createUser', async (req,res) =>{
         const create = clients.createUser(req.body.lastname, req.body.firstname, req.body.email, hashedPasswords)
         create.then(user => {
             if(user.status === "success"){
-                //res.send(user.data) 
                 res.render('Login');
-
             }else{
                 res.json(user)
             }
@@ -30,9 +28,11 @@ router.post('/createUser', async (req,res) =>{
             res.status(500).send()
         }
     })
+    
 router.get('/Profile', function(req,res){
     res.render('Profile', userdata)
 })
+
 router.post('/Profile', function(req,res){
     const user = clients.SearchUser(req.body.mail)
     try{
