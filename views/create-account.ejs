@@ -79,17 +79,9 @@
             const lastname = document.querySelector('.case .lastname').value
             const email = document.querySelector('.case .email').value
             const password = document.querySelector('.case .password').value
-            console.log(email);
-            console.log(password);
-            console.log(lastname);
-            console.log(firstname);
-            console.log("heheha")
             link = '/api/client/CreateUser/' + email + '/' + password + '/' +  lastname + '/' + firstname;
-            console.log(link)
             location.href = link;
-        }
-            
-            
+        }    
     </script> 
     <footer></footer>
 </body>

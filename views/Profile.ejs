@@ -40,7 +40,7 @@
                     <h1>My Profile</h1>
                 </div>
                 <div class = "login-body">
-                    <form name="inscription" onsubmit="return false" action="#" method="post">
+                    <form name="inscription" action="/api/client" method="post">
                         <div class="case">
                             <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname" value="<%- firstname %>">
                         </div>
@@ -53,52 +53,13 @@
                         <div class="case">
                             <input type="password" class="password" required placeholder="Password" id="password" name="password" value="<%- password %>">
                         </div>
+                        <button class = "sign-button" onclick=" action ='/api/client/UpdateUser'" type ="submit">Update</button>
+                        <button class = "sign-button" onclick=" action ='/api/client/DeleteClient'" type ="submit">Delete</button>
                     </form>
-                    <div class = "sign-button">
-                        <p class="update">Update</p>
-                    </div>
-                    <br>
-                    <div class = "sign-button">
-                        <p class = "delete">Delete</p>
-                    </div>
                 </div>
-
             </div>
         </div>
     </section>
-    <script>
-
-    const btnDelete = document.querySelector('.sign-button .delete')
-    const btnUpdate= document.querySelector('.sign-button .update')
-
-        btnDelete.addEventListener('click', () => { 
-            DeleteUserInfo();
-            
-        });
-
-        btnUpdate.addEventListener('click', () => { 
-            UpdateUserInfo();
-        });
-
-        function UpdateUserInfo(){
-            const firstname = document.querySelector('.case .firstname').value
-            const lastname = document.querySelector('.case .lastname').value
-            const email = document.querySelector('.case .email').value
-            const password = document.querySelector('.case .password').value
-            link = '/api/client/UpdateUser/' + lastname + '/' + firstname +'/' + email + '/' + password;
-            location.href = link;
-        }
-
-        function DeleteUserInfo(){
-
-            const email = document.querySelector('.case .email').value
-            const password = document.querySelector('.case .password').value
-            link = '/api/client/DeleteClient/' +  email + '/' + password;
-            location.href = link;
-        }
-            
-            
-    </script>
     <footer></footer>
 </body>
 </html>

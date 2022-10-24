@@ -6,8 +6,10 @@ const plantsQuery = require('../../js/queries/plantsQueries')
 const path = require('path')
 const bcrypt = require('bcrypt');
 const { appendFile } = require('fs');
+const { doesNotMatch } = require('assert');
 const app =express();
 router.use(express.urlencoded({extended:false}))
+var userdata = null;
 
 router.get('/', function(req,res){
     db.select().from('client').orderBy('mail').then(function(data){
@@ -32,33 +34,54 @@ router.post('/createUser', async (req,res) =>{
             res.status(500).send()
         }
     })
-
-router.get('/:mail/:password/Profile.html',function(req,res){
-    const User = clients.SearchUser(req.params.mail, req.params.password)
-    User.then(user => {
-        if(user.status === "success"){
-            res.render('Profile', user.data[0]);
-        }else{
-            res.json(user)
+router.get('/Profile', function(req,res){
+    res.render('Profile', userdata)
+})
+router.post('/Profile', function(req,res){
+    const user = clients.SearchUser(req.body.mail)
+    try{
+        if (bcrypt.compare(req.body.password, user.password)){
+            user.then(user => {
+                if(user.status === "success"){
+                    res.render('Profile', user.data[0]);
+                }else{
+                    res.json(user)
+                }
+            } )
+            return done(null, user)
         }
-    } )
+        else{
+            return done(null, false, {message : 'Password incorrect'})
+        }
+    }
+    catch(e){
+        return done(e)
+    }
+    
 })
 
 
 
 //put is idempotent so you are editing the actual data
 
-router.get('/UpdateUser/:lastname/:firstname/:mail/:password/', function(req,res){
-    const update = clients.updateUser(req.params.lastname, req.params.firstname, req.params.mail,req.params.password);
-    update.then(user =>{
-        if(user.success === true){
-            res.render('Profile', user.data)
-        }else{
-            res.send("Error 404 not found")
+router.post('/UpdateUser', async (req,res)=>{   
+    try{
+        const hashedPasswords =  await bcrypt.hash(req.body.password, 10)
+        update.then(user =>{
+            if(user.success === true){
+                res.render('Profile', userdata)
+            }else{
+                res.send("Error 404 not found")
+            }
         }
+        )}catch{
+            res.status(500).send()
+        }
+
+   
         
     })
-})
+
 
 
 router.post('/', function(req,res){
@@ -68,6 +91,8 @@ router.post('/', function(req,res){
         if(user.status === "success"){
             select.then(plants => {
                 data = user.data;
+                userdata = data[0];
+                userdata.password = req.body.password;
                 res.render('Home', {client: data[0], plants: plants});
                 });
 
@@ -78,8 +103,8 @@ router.post('/', function(req,res){
 })
 
 
-router.get('/DeleteClient/:mail/:password', function(req,res){
-    const del = clients.DeleteUser( req.params.mail, req.params.password)
+router.post('/DeleteClient', async (req,res) => {
+    const del = clients.DeleteUser( req.body.email)
     del.then(() =>{
         res.redirect('/')
     })

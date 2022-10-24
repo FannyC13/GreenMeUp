@@ -1,16 +1,17 @@
+const bcrypt = require('bcrypt');
+
+
 const db = require('../../database');
 
 const createUser = async (lastname,firstname,mail,password) => {
     try{
       const create = await db('clients').insert({lastname:lastname, firstname:firstname, password: password, mail: mail});
-      console.log(create)
       respObj = {
         status: "success",
         data: create
       }
       return respObj
     }catch(e){
-      console.log(e)
       respObj = {
         status: "failed",
         data: "User already exists"
@@ -38,22 +39,19 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
             throw new Error();
         }
     }catch(e){
-      console.log(e)
       return{status: "false", data: "User doesn't exist, try again"}
     }
 }
 
     
-  const DeleteUser = async (mail,password) => {
+  const DeleteUser = async (mail) => {
     try{
-      const del = await db('clients').where({password: password, mail: mail}).del();
-      console.log(del)
+      const del = await db('clients').where({mail: mail}).del();
       respObj = {
         status: "success",
       }
       return respObj
     }catch(e){
-      console.log(e)
       respObj = {
         status: "failed",
         data: "User not Found"
@@ -75,7 +73,6 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
             throw new Error("User not found");
         }
     }catch(e){
-      console.log(e)
       return {   
         status: "failed",
         data: "User not Found"
