@@ -3,7 +3,6 @@ const app = express();
 const apiRoute = require('./routes/api')
 app.use(express.json());
 const path = require('path');
-const { createUser } = require('./js/queries/clientQueries');
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')

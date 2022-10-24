@@ -19,7 +19,7 @@ router.post('/createUser', async (req,res) =>{
         const create = clients.createUser(req.body.lastname, req.body.firstname, req.body.email, hashedPasswords)
         create.then(user => {
             if(user.status === "success"){
-                res.render('Login');
+                res.redirect('/');
             }else{
                 res.json(user)
             }
@@ -28,7 +28,7 @@ router.post('/createUser', async (req,res) =>{
             res.status(500).send()
         }
     })
-    
+
 router.get('/Profile', function(req,res){
     res.render('Profile', userdata)
 })
