@@ -3,11 +3,7 @@ const router = express.Router();
 const db = require('../../database');
 const clients = require('../../js/queries/clientQueries')
 const plantsQuery = require('../../js/queries/plantsQueries')
-const path = require('path')
 const bcrypt = require('bcrypt');
-const { appendFile } = require('fs');
-const { doesNotMatch } = require('assert');
-const app =express();
 router.use(express.urlencoded({extended:false}))
 var userdata = null;
 
