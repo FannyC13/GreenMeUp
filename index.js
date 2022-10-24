@@ -13,11 +13,11 @@ app.use('/api',apiRoute)
 app.use(express.static('public'))
 
 app.get('/',function(req,res){
-    res.sendFile(__dirname + '/public/html/Login.html')
+    res.render('Login')
 })
 
-app.get('/create-account.html',function(req,res){
-    res.sendFile(__dirname + '/public/html/create-account.html')
+app.get('/create-account',function(req,res){
+    res.render('create-account')
 })
 
 app.listen('3000',()=>{

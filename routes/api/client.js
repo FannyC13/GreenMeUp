@@ -5,6 +5,9 @@ const clients = require('../../js/queries/clientQueries')
 const plantsQuery = require('../../js/queries/plantsQueries')
 const path = require('path')
 const bcrypt = require('bcrypt');
+const { appendFile } = require('fs');
+const app =express();
+router.use(express.urlencoded({extended:false}))
 
 router.get('/', function(req,res){
     db.select().from('client').orderBy('mail').then(function(data){
@@ -12,14 +15,14 @@ router.get('/', function(req,res){
 });
 });
 
-router.get('/CreateUser/:mail/:password/:lastname/:firstname', async (req,res) =>{
+router.post('/createUser', async (req,res) =>{
     try{
-        const hashedPasswords = await bcrypt.hash(req.params.password, 10)
-        const create = clients.createUser(req.params.lastname, req.params.firstname,  req.params.mail,hashedPasswords)
+        const hashedPasswords = await bcrypt.hash(req.body.password, 10)
+        const create = clients.createUser(req.body.lastname, req.body.firstname, req.body.email, hashedPasswords)
         create.then(user => {
             if(user.status === "success"){
-                //res.send(user.data)
-                res.sendFile('Login.html', { root: path.join(__dirname, '../../public/html/')});
+                //res.send(user.data) 
+                res.render('Login');
 
             }else{
                 res.json(user)
@@ -28,7 +31,7 @@ router.get('/CreateUser/:mail/:password/:lastname/:firstname', async (req,res) =
     }catch{
         res.status(500).send()
     }
-    })
+})
 
 router.get('/:mail/:password/Home.html',function(req,res){
         res.sendFile('Home.html', { root: path.join(dirname, '../../public/html/')});
@@ -45,6 +48,8 @@ router.get('/:mail/:password/Profile.html',function(req,res){
     } )
 })
 
+
+
 router.patch('/:mail', function(req,res){
     db('client').where({mail: req.params.mail}).update(req.body).then(function(data){
         res.send(data);
@@ -59,9 +64,10 @@ router.get('/UpdateUser/:lastname/:firstname/:mail/:password/', function(req,res
         res.send(user.data)
     })
 })
-router.get('/:mail/:password', function(req,res){
-    
-    const Login = clients.SearchUser(req.params.mail,req.params.password);
+
+
+router.post('/', function(req,res){
+    const Login = clients.SearchUser(req.body.email,req.body.password);
     const select = plantsQuery.selectAllPlants();
     Login.then(user => {
         if(user.status === "success"){

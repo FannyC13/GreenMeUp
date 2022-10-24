@@ -62,9 +62,9 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
       
   }
 
-  const SearchUser = async (mail,password) => {
+  const SearchUser = async (mail) => {
     try{
-      const search = await db('clients').where({password: password, mail: mail}).select();
+      const search = await db('clients').where({mail: mail}).select();
       if(Object.keys(search).length != 0){
         return {
                 status: "success",

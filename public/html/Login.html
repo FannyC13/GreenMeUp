@@ -34,17 +34,17 @@
                     <h1>Login</h1>
                 </div>
                 <div class = "login-body">
-                    <form name="inscription" onsubmit="return false" action="#" method="post">
+                    <form action = "/test" method="post">
                             <div class="case">
                                 <input type="email" class="email" required placeholder="Enter email" id="mail" name="email">
                             </div>
                             <div class="case">
                                 <input type="password" class="password" required placeholder="Password" id="password" name="password">
                             </div>
+                            <div class = "sign-button" type="submit">
+                                <p>Sign in</p>
+                            </div>
                     </form>
-                    <div class = "sign-button" >
-                        <p>Sign in</p>
-                    </div>
                 </div>
                 <div class = "login-footer">
                     <p>Don't have an account ? <a href = "create-account.html"><br>Sign up now</a></p>
@@ -52,7 +52,7 @@
             </div>
         </div>
     </section>
-    <script>
+    <!--<script>
         const btnLogin = document.querySelector('.sign-button')
         btnLogin.addEventListener('click', () => {
             User(event);
@@ -74,14 +74,12 @@
             const password = document.querySelector('.case .password').value
             console.log(email);
             console.log(password);
-            const hashedPasswords = bcrypt.hash(password, 10)
-            console.log(hashedPasswords);
-            link = '/api/client/' + email + '/' + hashedPasswords;
+            link = '/api/client/' + email + '/' + password;
             console.log(link)
             location.href = link;
             console.log(link)
         }
-    </script>
+    </script>-->
     <footer></footer>
 </body>
 </html>
