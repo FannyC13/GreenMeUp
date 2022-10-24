@@ -3,7 +3,6 @@ const db = require('../../database');
 const createUser = async (lastname,firstname,mail,password) => {
     try{
       const create = await db('clients').insert({lastname:lastname, firstname:firstname, password: password, mail: mail});
-      console.log(create)
       respObj = {
         status: "success",
         data: create
@@ -47,7 +46,6 @@ const updateUser = async (lastname,firstname,mail,password)  =>{
   const DeleteUser = async (mail,password) => {
     try{
       const del = await db('clients').where({password: password, mail: mail}).del();
-      console.log(del)
       respObj = {
         status: "success",
       }

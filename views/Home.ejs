@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/home.css">
     <title>Login page</title>
 </head>
 <body>
@@ -34,15 +35,14 @@
     </header>
     <section class = "display">
         <div id="app">
-                <div v-for="(image, index) in images">
-                    <div class="plant">
+            <div class = "plant-container">
+                <div class="plant" v-for="(image, index) in images">
                         <img v-bind:src="path + image">
-                        <p>{{prices[index]}}</p>
-                    </div>
+                        <p class="names"> {{names[index]}} </p>
+                        <p class="prices">{{prices[index]}}  </p>
                 </div>  
-        </div>
-            
-            
+            </div>
+        </div>   
     </section>
 
     <script type="importmap">
@@ -60,19 +60,24 @@
         data() {
             return {
                 path: "/ressources/",
-                images: ['img1.jpg','img2.jpg','img3.png','img4.png'],
+                images: [],
                 prices: [],
+                names: []
             }
           },
         methods: {
-            initializePrices(){
+            initializePlants(){
+                let index = 1
                 "<% plants.forEach(plant => { %>"
-                 this.prices.push("<%= plant.price %>$")
+                 this.prices.push("$<%= plant.price %>")
+                 this.names.push("<%= plant.name %>")
+                 this.images.push("img"+index+".png")
+                 index ++
                 "<% }); %>"
             }
         },
         beforeMount(){
-            this.initializePrices()
+            this.initializePlants()
         }
         }).mount('#app')
       </script>
