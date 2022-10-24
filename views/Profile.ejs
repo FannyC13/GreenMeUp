@@ -12,7 +12,7 @@
     <header>
         <nav>
             <div class="home">
-                <a href ="" >
+                <a href ="/" >
                     <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
                 </a>
             </div>
@@ -25,11 +25,6 @@
                 </a>
             </div>
 
-            <div class="profile">
-                <a href ="Profile.html" >
-                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
-                </a>
-            </div>
             
         </nav>
 
@@ -41,7 +36,7 @@
                     <h1>My Profile</h1>
                 </div>
                 <div class = "login-body">
-                    <form name="inscription" action="/api/client" method="post">
+                    <form name="inscription" action="/api/client/Profile" method="post">
                         <div class="case">
                             <input type="firstname" class="firstname" required placeholder="Enter firstname" id="firstname" name="firstname" value="<%- firstname %>">
                         </div>
@@ -49,7 +44,7 @@
                             <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname" value="<%- lastname %>">
                         </div>
                         <div class="case">
-                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email" value="<%- mail %>">
+                            <input type="mail" class="mail" required placeholder="Enter mail" id="mail" name="mail" value="<%- mail %>">
                         </div>
                         <div class="case">
                             <input type="password" class="password" required placeholder="Password" id="password" name="password" value="<%- password %>">

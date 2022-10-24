@@ -6,9 +6,10 @@
 }
 
 body{
+    background-image: url("../ressources/bg.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:auto;
     image-rendering: optimizeQuality;
 }
 

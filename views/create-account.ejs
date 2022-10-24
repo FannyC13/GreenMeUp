@@ -13,7 +13,7 @@
     <header>
         <nav>
             <div class="home">
-                <a href ="" >
+                <a href ="/" >
                     <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
                 </a>
             </div>
@@ -43,7 +43,7 @@
                             <input type="lastname" class="lastname" required placeholder="Enter lastname" id="lastname" name="lastname">
                         </div>
                         <div class="case">
-                            <input type="email" class="email" required placeholder="Enter email" id="mail" name="email">
+                            <input type="mail" class="mail" required placeholder="Enter mail" id="mail" name="mail">
                         </div>
                         <div class="case">
                             <input type="password" class="password" required placeholder="Password" id="password" name="password">
@@ -79,9 +79,9 @@
         function getUserInfo(){
             const firstname = document.querySelector('.case .firstname').value
             const lastname = document.querySelector('.case .lastname').value
-            const email = document.querySelector('.case .email').value
+            const mail = document.querySelector('.case .mail').value
             const password = document.querySelector('.case .password').value
-            link = '/api/client/CreateUser/' + email + '/' + password + '/' +  lastname + '/' + firstname;
+            link = '/api/client/CreateUser/' + mail + '/' + password + '/' +  lastname + '/' + firstname;
             location.href = link;
         }    
     </script> 

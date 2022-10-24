@@ -16,7 +16,7 @@ router.get('/', function(req,res){
 router.post('/createUser', async (req,res) =>{
     try{
         const hashedPasswords = await bcrypt.hash(req.body.password, 10)
-        const create = clients.createUser(req.body.lastname, req.body.firstname, req.body.email, hashedPasswords)
+        const create = clients.createUser(req.body.lastname, req.body.firstname, req.body.mail, hashedPasswords)
         create.then(user => {
             if(user.status === "success"){
                 res.redirect('/');
@@ -63,7 +63,9 @@ router.post('/Profile', function(req,res){
 router.post('/UpdateUser', async (req,res)=>{   
     try{
         const hashedPasswords =  await bcrypt.hash(req.body.password, 10)
+        const update = clients.updateUser(req.body.lastname,req.body.firstname,req.body.mail, hashedPasswords)
         update.then(user =>{
+            updateUserData(req.body.lastname,req.body.firstname,req.body.mail,req.body.password)
             if(user.success === true){
                 res.render('Profile', userdata)
             }else{
@@ -81,7 +83,7 @@ router.post('/UpdateUser', async (req,res)=>{
 
 
 router.post('/', function(req,res){
-    const Login = clients.SearchUser(req.body.email,req.body.password);
+    const Login = clients.SearchUser(req.body.mail,req.body.password);
     const select = plantsQuery.selectAllPlants();
     Login.then(user => {
         if(user.status === "success"){
@@ -100,11 +102,19 @@ router.post('/', function(req,res){
 
 
 router.post('/DeleteClient', async (req,res) => {
-    const del = clients.DeleteUser( req.body.email)
+    const del = clients.DeleteUser( req.body.mail)
     del.then(() =>{
         res.redirect('/')
     })
 })
 
+
+function updateUserData(lastname,firstname,mail,password){
+    userdata.lastname = lastname
+    userdata.firstname = firstname
+    userdata.mail = mail
+    userdata.password = password
+
+}
 
 module.exports = router;
