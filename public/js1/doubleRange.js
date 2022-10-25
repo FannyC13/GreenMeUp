@@ -135,7 +135,7 @@ function setDoubleRange(configDoubleRange)
 		//Arrondie la valeur par rapport au chiffre stepValue :
 		resPFV = Math.round(resPFV/stepValue)*stepValue;
 		//Ajoute l'unité :
-		if(afficherUnite){ resPFV = unite +' '+ resPFV;  }
+		if(afficherUnite){ resPFV = unite + resPFV;  }
 
 		return resPFV;
 	}

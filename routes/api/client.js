@@ -80,7 +80,12 @@ router.post('/UpdateUser', async (req,res)=>{
         
     })
 
-
+router.post('/Homefilter', function(req, res){
+    const select = plantsQuery.selectPlants(req.body.typePlant, req.body.pmin, req.body.pmax);
+    select.then(plants => {
+        res.render('Home', {client: userdata, plants: plants});
+    });
+});
 
 router.post('/', function(req,res){
     const Login = clients.SearchUser(req.body.mail,req.body.password);
@@ -107,7 +112,6 @@ router.post('/DeleteClient', async (req,res) => {
         res.redirect('/')
     })
 })
-
 
 function updateUserData(lastname,firstname,mail,password){
     userdata.lastname = lastname

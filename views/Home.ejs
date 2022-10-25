@@ -16,8 +16,8 @@
     <header>
         <nav>
             <div class="home">
-                <a href ="/" >
-                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
+                <a href="/">
+                    <img class="logo" src="/ressources/logo.png" alt="logo"></img>
                 </a>
             </div>
             <div class="openButton" onclick="closeForm()">
@@ -25,22 +25,30 @@
             </div>
             <div class="loginPopup">
                 <div class="formPopup" id="popupForm">
-                    <form action="/action_page" class="formContainer">
-                        <h2>Please Log in</h2>
-                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                    </form>
-                    <form>
+                    <form action="/api/client/Homefilter" class="formContainer" method="post">
+                        <div class="filter">Choose your filters</div>
+                        <button type="button" class="btn_cancel" onclick="closeForm()">Close the form</button>
                         <div id="doubleRange" class="doubleRange">
                             <div class="barre">
                                 <div class="barreMilieu" style="width:50%; left:25%;"></div>
                                 <div class="t1 thumb" style="left:25%"></div>
                                 <div class="t2 thumb" style="left:75%;"></div>
                             </div>
-                            <div class="label">from <span class="labelMin">$0</span> to <span
-                                    class="labelMax">$150</span></div>
+                            <div class="labelMin">$0</div>
+                            <div class="labelMax">$150</div>
                             <input type="hidden" name="pmin" value="" class="inputMin" />
                             <input type="hidden" name="pmax" value="" class="inputMax" />
                         </div>
+                        <select name="typePlant" id="typePlant">
+                            <option value="">Select your type
+                            <option value="Tree">Tree
+                            <option value="Cactus">Cactus
+                            <option value="Flower">Flower
+                            <option value="Cane plant">Cane plant
+                            <option value="Carnivorous">Carnivorous
+                            <option value="Fruit plant">Fruit plant
+                        </select>
+                        <button type="submit" class="btn_submit">Add filter</button>
                     </form>
                     <script type="text/javascript" src="/js1/doubleRange.js"></script>
                     <script type="text/javascript">
@@ -53,13 +61,11 @@
                             defaultMaxValue: 100,
                             unite: '$'
                         });
-                        function openForm() {
-                        }
                         function closeForm() {
-                            if (document.getElementById("popupForm").style.display == "none"){
+                            if (document.getElementById("popupForm").style.display == "none") {
                                 document.getElementById("popupForm").style.display = "block";
                             }
-                            else{
+                            else {
                                 document.getElementById("popupForm").style.display = "none";
                             }
                         }
@@ -72,7 +78,8 @@
                 </div>
 
                 <div class="profile">
-                    <img class="account" src="/ressources/Account.png" onclick="window.location='/views/Profile'" alt="account"></img>
+                    <img class="account" src="/ressources/Account.png" onclick="window.location='/api/client/Profile'"
+                        alt="account"></img>
                 </div>
 
             </div>
@@ -81,14 +88,14 @@
     </header>
     <section class="display">
         <div id="app">
-            <div class = "plant-container">
+            <div class="plant-container">
                 <div class="plant" v-for="(image, index) in images">
-                        <img v-bind:src="path + image">
-                        <p class="names"> {{names[index]}} </p>
-                        <p class="prices">{{prices[index]}}  </p>
-                </div>  
+                    <img v-bind:src="path + image">
+                    <p class="names"> {{names[index]}} </p>
+                    <p class="prices">{{prices[index]}} </p>
+                </div>
             </div>
-        </div>   
+        </div>
     </section>
 
     <script type="importmap">
@@ -103,28 +110,28 @@
         import { createApp } from 'vue'
 
         createApp({
-        data() {
-            return {
-                path: "/ressources/",
-                images: [],
-                prices: [],
-                names: []
+            data() {
+                return {
+                    path: "/ressources/",
+                    images: [],
+                    prices: [],
+                    names: []
+                }
+            },
+            methods: {
+                initializePlants() {
+                    let index = 1
+                    "<% plants.forEach(plant => { %>"
+                    this.prices.push("$<%= plant.price %>")
+                    this.names.push("<%= plant.name %>")
+                    this.images.push("img" + index + ".png")
+                    index++
+                    "<% }); %>"
+                }
+            },
+            beforeMount() {
+                this.initializePlants()
             }
-          },
-        methods: {
-            initializePlants(){
-                let index = 1
-                "<% plants.forEach(plant => { %>"
-                 this.prices.push("$<%= plant.price %>")
-                 this.names.push("<%= plant.name %>")
-                 this.images.push("img"+index+".png")
-                 index ++
-                "<% }); %>"
-            }
-        },
-        beforeMount(){
-            this.initializePlants()
-        }
         }).mount('#app')
     </script>
 
