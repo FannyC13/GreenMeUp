@@ -94,6 +94,15 @@ input{
 
 /* ------------------- HEADER ---------------------- */
 
+.openButton img{
+    background-color: #6DBF6A; 
+    width:40px; 
+    height: auto;
+    border: none;
+    padding-top: 18px;
+    cursor: pointer;
+
+}
 
 nav{
     display: flex;

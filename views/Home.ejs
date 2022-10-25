@@ -1,48 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/doubleRange.css">
     <title>Login page</title>
 </head>
-<body>
+
+<body onload='document.getElementById("popupForm").style.display = "none"'>
     <header>
         <nav>
             <div class="home">
-                <a href ="" >
-                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
+                <a href="">
+                    <img class="logo" src="/ressources/logo.png" alt="logo"></img>
                 </a>
             </div>
-            <div class ="filter">
+            <div class="openButton" onclick="closeForm()">
+                <img class="filter" src="/ressources/filtre.png"></img>
+            </div>
+            <div class="loginPopup">
+                <div class="formPopup" id="popupForm">
+                    <form action="/action_page" class="formContainer">
+                        <h2>Please Log in</h2>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                    <form>
+                        <div id="doubleRange" class="doubleRange">
+                            <div class="barre">
+                                <div class="barreMilieu" style="width:50%; left:25%;"></div>
+                                <div class="t1 thumb" style="left:25%"></div>
+                                <div class="t2 thumb" style="left:75%;"></div>
+                            </div>
+                            <div class="label">from <span class="labelMin">$0</span> to <span
+                                    class="labelMax">$150</span></div>
+                            <input type="hidden" name="pmin" value="" class="inputMin" />
+                            <input type="hidden" name="pmax" value="" class="inputMax" />
+                        </div>
+                    </form>
+                    <script type="text/javascript" src="/js1/doubleRange.js"></script>
+                    <script type="text/javascript">
+                        setDoubleRange({
+                            element: '#doubleRange',
+                            minValue: 0,
+                            maxValue: 150,
+                            stepValue: 1,
+                            defaultMinValue: 5,
+                            defaultMaxValue: 100,
+                            unite: '$'
+                        });
+                        function openForm() {
+                        }
+                        function closeForm() {
+                            if (document.getElementById("popupForm").style.display == "none"){
+                                document.getElementById("popupForm").style.display = "block";
+                            }
+                            else{
+                                document.getElementById("popupForm").style.display = "none";
+                            }
+                        }
+                    </script>
+                </div>
+                <div class="shop">
+                    <a href="">
+                        <img class="cart" src="/ressources/Cart.png" alt="cart"></img>
+                    </a>
+                </div>
+
+                <div class="profile">
+                    <img class="account" src="/ressources/Account.png" alt="account"></img>
+                </div>
 
             </div>
-            <div class="shop">
-                <a href ="" >
-                    <img class = "cart" src="/ressources/Cart.png" alt="cart"></img>
-                </a>
-            </div>
-
-            <div class="profile">
-                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
-            </div>
-
-        </div>
         </nav>
 
     </header>
-    <section class = "display">
+    <section class="display">
         <div id="app">
-                <div v-for="(image, index) in images">
-                    <div class="plant">
-                        <img v-bind:src="path + image">
-                        <p>{{prices[index]}}</p>
-                    </div>
-                </div>  
+            <div v-for="(image, index) in images">
+                <div class="plant">
+                    <img v-bind:src="path + image">
+                    <p>{{prices[index]}}</p>
+                </div>
+            </div>
         </div>
-            
-            
+
+
     </section>
 
     <script type="importmap">
@@ -53,38 +98,38 @@
         }
       </script>
 
-      <script type="module">
+    <script type="module">
         import { createApp } from 'vue'
-    
+
         createApp({
-        data() {
-            return {
-                path: "/ressources/",
-                images: ['img1.jpg','img2.jpg','img3.png','img4.png'],
-                prices: [],
+            data() {
+                return {
+                    path: "/ressources/",
+                    images: ['img1.jpg', 'img2.jpg', 'img3.png', 'img4.png'],
+                    prices: [],
+                }
+            },
+            methods: {
+                initializePrices() {
+                    "<% plants.forEach(plant => { %>"
+                    this.prices.push("<%= plant.price %>$")
+                    "<% }); %>"
+                }
+            },
+            beforeMount() {
+                this.initializePrices()
             }
-          },
-        methods: {
-            initializePrices(){
-                "<% plants.forEach(plant => { %>"
-                 this.prices.push("<%= plant.price %>$")
-                "<% }); %>"
-            }
-        },
-        beforeMount(){
-            this.initializePrices()
-        }
         }).mount('#app')
-      </script>
+    </script>
 
     <script>
 
 
 
-       const Account = document.querySelector('.account');
+        const Account = document.querySelector('.account');
         Account.addEventListener('click', () => {
-            const url =  window.location;
-            const U = url.pathname.split('/').slice(3,5);
+            const url = window.location;
+            const U = url.pathname.split('/').slice(3, 5);
             link = '/api/client/Profile';
             location.href = link;
         });
@@ -92,4 +137,5 @@
     </script>
     <footer></footer>
 </body>
+
 </html>
