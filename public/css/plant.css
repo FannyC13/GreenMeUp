@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:ital,wght@1,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:auto;
+    image-rendering: optimizeQuality;
+}
+
+.plant{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5vh;
+}
+
+.view-container{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.mini-view img{
+    cursor: pointer;
+    width: 7.5vw;
+    height: auto;
+    margin: 0 3vw 2vw 3vw;
+}
+
+.mini-view img:hover{
+    opacity: 0.5;
+}
+
+.view img{
+    width: 45vw;
+    height: auto;
+
+}
+
+.infos-container{
+    padding: 0 50px;
+}
+
+.plant-name{
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.plant-price{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
