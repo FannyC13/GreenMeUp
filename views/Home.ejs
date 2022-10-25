@@ -14,8 +14,8 @@
     <header>
         <nav>
             <div class="home">
-                <a href="">
-                    <img class="logo" src="/ressources/logo.png" alt="logo"></img>
+                <a href ="/" >
+                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
                 </a>
             </div>
             <div class="openButton" onclick="closeForm()">
@@ -79,15 +79,14 @@
     </header>
     <section class="display">
         <div id="app">
-            <div v-for="(image, index) in images">
-                <div class="plant">
-                    <img v-bind:src="path + image">
-                    <p>{{prices[index]}}</p>
-                </div>
+            <div class = "plant-container">
+                <div class="plant" v-for="(image, index) in images">
+                        <img v-bind:src="path + image">
+                        <p class="names"> {{names[index]}} </p>
+                        <p class="prices">{{prices[index]}}  </p>
+                </div>  
             </div>
-        </div>
-
-
+        </div>   
     </section>
 
     <script type="importmap">
@@ -102,37 +101,32 @@
         import { createApp } from 'vue'
 
         createApp({
-            data() {
-                return {
-                    path: "/ressources/",
-                    images: ['img1.jpg', 'img2.jpg', 'img3.png', 'img4.png'],
-                    prices: [],
-                }
-            },
-            methods: {
-                initializePrices() {
-                    "<% plants.forEach(plant => { %>"
-                    this.prices.push("<%= plant.price %>$")
-                    "<% }); %>"
-                }
-            },
-            beforeMount() {
-                this.initializePrices()
+        data() {
+            return {
+                path: "/ressources/",
+                images: [],
+                prices: [],
+                names: []
             }
+          },
+        methods: {
+            initializePlants(){
+                let index = 1
+                "<% plants.forEach(plant => { %>"
+                 this.prices.push("$<%= plant.price %>")
+                 this.names.push("<%= plant.name %>")
+                 this.images.push("img"+index+".png")
+                 index ++
+                "<% }); %>"
+            }
+        },
+        beforeMount(){
+            this.initializePlants()
+        }
         }).mount('#app')
     </script>
 
     <script>
-
-
-
-        const Account = document.querySelector('.account');
-        Account.addEventListener('click', () => {
-            const url = window.location;
-            const U = url.pathname.split('/').slice(3, 5);
-            link = '/api/client/Profile';
-            location.href = link;
-        });
 
     </script>
     <footer></footer>

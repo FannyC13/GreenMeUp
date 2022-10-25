@@ -24,7 +24,7 @@ const createUser = async (lastname,firstname,mail,password) => {
 
 const updateUser = async (lastname,firstname,mail,password)  =>{
     try{
-    const update = await db('clients').where({mail: mail}).update({
+      const update = await db('clients').where({mail: mail}).update({
         lastname:lastname,
         firstname: firstname,
         password:password,
