@@ -26,7 +26,9 @@
             </div>
 
             <div class="profile">
+                <a href = "/api/client/Profile">
                     <img class = "account" src="/ressources/Account.png" alt="account"></img>
+                </a>
             </div>
 
         </div>
@@ -36,7 +38,7 @@
     <section class = "display">
         <div id="app">
             <div class = "plant-container">
-                <div class="plant" v-for="(image, index) in images">
+                <div class="plant" v-for="(image, index) in images" v-on:click="goToPlant(index)">
                         <img v-bind:src="path + image">
                         <p class="names"> {{names[index]}} </p>
                         <p class="prices">{{prices[index]}}  </p>
@@ -59,10 +61,11 @@
         createApp({
         data() {
             return {
-                path: "/ressources/",
+                path: "/ressources/plantViews/",
                 images: [],
                 prices: [],
-                names: []
+                names: [],
+                selectedPlant: 0
             }
           },
         methods: {
@@ -74,17 +77,15 @@
                  this.images.push("img"+index+".png")
                  index ++
                 "<% }); %>"
-            }
+            },goToPlant(index){
+                location.href="/api/plants/"+this.names[index]
+        }
         },
         beforeMount(){
             this.initializePlants()
         }
         }).mount('#app')
       </script>
-
-    <script>
-
-    </script>
     <footer></footer>
 </body>
 </html>

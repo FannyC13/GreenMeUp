@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/plant.css">
+    <title>GreenMeUp Plants </title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="home">
+                <a href ="/" >
+                    <img class = "logo" src="/ressources/logo.png" alt="logo"></img>
+                </a>
+            </div>
+            <div class="shop">
+                <a href ="" >
+                    <img class = "cart" src="/ressources/Cart.png" alt="cart"></img>
+                </a>
+            </div>
+
+            <div class="profile">
+                <a href = "/api/client/Profile">
+                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
+                </a>
+            </div>
+        </div>
+        </nav>
+
+    </header>
+    <div id="app">
+        <section class="plant">
+            <div class="view-container">
+                <div class="mini-view-container">
+                    <div class="mini-view" @mouseover="updateVariant(1)">
+                        <img v-bind:src="path + image + '.1.png'"></img>
+                    </div>
+                    <div class="mini-view" @mouseover="updateVariant(2)">
+                        <img v-bind:src="path + image + '.2.png'"></img>
+                    </div>
+                    <div class="mini-view" @mouseover="updateVariant(3)">
+                        <img v-bind:src="path + image + '.3.png'"></img>
+                    </div>
+                </div>
+                <div class="view">
+                    <img v-bind:src="path + image + '.' + selectedVariant + '.png'"></img>
+                </div>
+            </div>
+            <div class="infos-container">
+                <div class="title">
+                    <p class="plant-name"><%- plant.name %></p>
+                    <p class="plant-price">$"<%- plant.price %>"</p>
+                </div>
+                <div class="description">
+                    <p><%= plant.description %></p>
+                </div>
+                <div class="delivery">
+                    delivery
+                </div>
+                <div class="cart">
+                    cart
+                </div>
+            </div>
+        </section>
+    </div>
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+      </script>
+
+      <script type="module">
+        import { createApp } from 'vue'
+    
+        createApp({
+        data() {
+            return {
+                path: "/ressources/miniPlantViews/",
+                image: "img"+"<%= plant.idplants %>",
+                selectedVariant: 1
+            }
+          },
+        methods: {
+            updateVariant(index){
+                this.selectedVariant = index
+            }
+        },
+        beforeMount(){
+            console.log(this.path + "img"+"<%= plant.idplants %>"+".1.png")
+        }
+        }).mount('#app')
+      </script>
+</body>
+</html>
