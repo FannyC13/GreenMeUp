@@ -56,6 +56,12 @@ router.post('/Profile', function(req,res){
     
 })
 
+router.post('/HomeSearch', function(req,res){
+    const select = plantsQuery.searchPlant(req.body.barreSearch);
+    select.then(plants => {
+        res.render('Home', {client: userdata, plants: plants});
+    });
+});
 
 
 //put is idempotent so you are editing the actual data

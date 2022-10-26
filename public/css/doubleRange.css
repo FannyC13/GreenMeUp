@@ -41,3 +41,11 @@
     margin-top: -20px;
     margin-left: 470px;
   }
+  .searchBarre{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    height: 30px;
+    display: flex;
+    width: 60%;
+  }
