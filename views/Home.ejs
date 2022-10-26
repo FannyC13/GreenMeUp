@@ -74,7 +74,7 @@
                 "<% plants.forEach(plant => { %>"
                  this.prices.push("$<%= plant.price %>")
                  this.names.push("<%= plant.name %>")
-                 this.images.push("img"+index+".png")
+                 this.images.push("img"+"<%= plant.idplants %>"+".png")
                  index ++
                 "<% }); %>"
             },goToPlant(index){
