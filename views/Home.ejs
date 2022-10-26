@@ -23,6 +23,10 @@
             <div class="openButton" onclick="closeForm()">
                 <img class="filter" src="/ressources/filtre.png"></img>
             </div>
+            <form class="searchBarre" action="/api/client/HomeSearch" method="post">
+                <input name="barreSearch" class="barre" id="barre" type="search" placeholder="Find your plant !">
+                <button type="submit" class="btn_submit1" onclick="findPlant(getElementById('barre').value)">Search</button>
+            </form>
             <div class="loginPopup">
                 <div class="formPopup" id="popupForm">
                     <form action="/api/client/Homefilter" class="formContainer" method="post">
@@ -68,6 +72,9 @@
                             else {
                                 document.getElementById("popupForm").style.display = "none";
                             }
+                        }
+                        function findPlant(e){
+                            searchPlant(e);
                         }
                     </script>
                 </div>

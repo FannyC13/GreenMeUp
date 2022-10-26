@@ -21,5 +21,17 @@ const selectPlants = async (type, priceMin, priceMax) => {
     }
 }
 
+const searchPlant = async (name) => {
+    try{
+        const selectQuery = await db('plants').whereLike('name', '%' + name + '%').select();
+        return selectQuery
+    }catch(e){
+        console.log("Error with SQL database")
+        return null;
+    }
+}
+
 exports.selectAllPlants = selectAllPlants;
 exports.selectPlants = selectPlants;
+exports.searchPlant = searchPlant;
+
