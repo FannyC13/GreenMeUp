@@ -61,23 +61,28 @@ input{
     padding: 12px;
 }
 
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
 .sign-button{
-    text-align: center;
-    width: 30%;
-    font-size: 17px;
-    background-color: #6DBF6A;
+    background-color: #5bac58;
+    border: none;
+    padding: 10px 0;
+    color: white;
+    width: 35%;
     border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .sign-button:hover{
     cursor: pointer;
-    background-color: #5bac58;
+    background-color: #6ab968;
+    
 }
 
-.sign-button p{
-    padding: 8px 0;
-    color: white;
-}
 
 
 .login-footer{
@@ -90,47 +95,4 @@ input{
     text-decoration: none;
     color: #6DBF6A
 
-}
-
-/* ------------------- HEADER ---------------------- */
-
-.openButton img{
-    background-color: #6DBF6A; 
-    width:40px; 
-    height: auto;
-    border: none;
-    padding-top: 18px;
-    cursor: pointer;
-
-}
-
-nav{
-    display: flex;
-    flex-direction: row;
-    background-color: #6DBF6A;
-    width: 100%;
-}
-
-.home img{
-    height: 100px;
-    margin-top: -15%;
-    margin-left: -10%;
-}
-
-.shop{
-    position: absolute;
-    right: 2%;
-}
-
-.shop img{
-    height: 55px;
-    margin-top: 15%;
-
-}
-
-.account{
-    width: 50px;
-    position: absolute;
-    right: 7%;
-    top: 2%;
 }

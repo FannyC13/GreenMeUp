@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../database');
-const clients = require('../../js/queries/clientQueries')
-const plantsQuery = require('../../js/queries/plantsQueries')
+const clients = require('../../public/js/queries/clientQueries')
+const plantsQuery = require('../../public/js/queries/plantsQueries')
 const bcrypt = require('bcrypt');
 router.use(express.urlencoded({extended:false}))
 var userdata = null;

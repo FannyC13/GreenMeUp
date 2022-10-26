@@ -3,6 +3,8 @@
 .doubleRange .barre .barreMilieu{ height:6px; background-color:#1b9c35; position:absolute; }
 .doubleRange .barre .thumb{ width:15px; height:15px; background-color:white; border:1px solid grey; border-radius:50%; top:-5px; position:absolute; cursor:pointer; transform:translateX(-13px); }
 .doubleRange .label{ margin-top:15px; color:#131212; font-weight:bold; user-select:none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; }
+
+
 .formPopup {
     display: none;
     position: fixed;
@@ -22,9 +24,7 @@
     width: 600px;
     border-radius: 20px;
   }
-  .filter{
-    text-align: center;
-  }
+
   .btn_cancel{
     margin-left: 210px;
     margin-top: 20px;
@@ -41,11 +41,4 @@
     margin-top: -20px;
     margin-left: 470px;
   }
-  .searchBarre{
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 10px;
-    height: 30px;
-    display: flex;
-    width: 60%;
-  }
+

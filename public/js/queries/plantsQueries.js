@@ -1,4 +1,4 @@
-const  db = require('../../database');
+const  db = require('../../../database');
 
 
 const selectAllPlants = async () => {
@@ -23,7 +23,7 @@ const selectPlants = async (type, priceMin, priceMax) => {
 
 const searchPlant = async (name) => {
     try{
-        const selectQuery = await db('plants').whereLike('name', '%' + name + '%').select();
+        const selectQuery = await db('plants').whereRaw('name like "%'+name+'%"').select();
         return selectQuery
     }catch(e){
         console.log("Error with SQL database")
