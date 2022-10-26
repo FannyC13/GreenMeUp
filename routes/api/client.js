@@ -111,6 +111,14 @@ router.post('/', function(req,res){
     } )
 })
 
+router.get('/home', function(req,res){
+    const select = plantsQuery.selectAllPlants();
+        select.then(plants => {
+                res.render('Home', {plants: plants});
+                });
+})
+
+
 
 router.post('/DeleteClient', async (req,res) => {
     const del = clients.DeleteUser( req.body.mail)

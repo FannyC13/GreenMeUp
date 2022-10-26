@@ -12,97 +12,107 @@
 </head>
 
 <body onload='document.getElementById("popupForm").style.display = "none"'>
-    <header>
-        <nav>
-            <div class="home">
-                <a href="/">
-                    <img class="logo" src="/ressources/logo.png" alt="logo"></img>
-                </a>
-            </div>
-            <div class="openButton" onclick="closeForm()">
-                <img class="filter" src="/ressources/filtre.png"></img>
-            </div>
-            <form class="searchBarre" action="/api/client/HomeSearch" method="post">
-                <input name="barreSearch" class="barre" id="barre" type="search" placeholder="Find your plant !">
-                <button type="submit" class="btn_submit1" onclick="findPlant(getElementById('barre').value)">Search</button>
-            </form>
-            <div class="loginPopup">
-                <div class="formPopup" id="popupForm">
-                    <form action="/api/client/Homefilter" class="formContainer" method="post">
-                        <div class="filter">Choose your filters</div>
-                        <button type="button" class="btn_cancel" onclick="closeForm()">Close the form</button>
-                        <div id="doubleRange" class="doubleRange">
-                            <div class="barre">
-                                <div class="barreMilieu" style="width:50%; left:25%;"></div>
-                                <div class="t1 thumb" style="left:25%"></div>
-                                <div class="t2 thumb" style="left:75%;"></div>
-                            </div>
-                            <div class="labelMin">$0</div>
-                            <div class="labelMax">$150</div>
-                            <input type="hidden" name="pmin" value="" class="inputMin" />
-                            <input type="hidden" name="pmax" value="" class="inputMax" />
-                        </div>
-                        <select name="typePlant" id="typePlant">
-                            <option value="">Select your type
-                            <option value="Tree">Tree
-                            <option value="Cactus">Cactus
-                            <option value="Flower">Flower
-                            <option value="Cane plant">Cane plant
-                            <option value="Carnivorous">Carnivorous
-                            <option value="Fruit plant">Fruit plant
-                        </select>
-                        <button type="submit" class="btn_submit">Add filter</button>
+    <div class="overlay">
+        <header>
+            <nav>
+                <div class="home">
+                    <a href="/api/client/home">
+                        <img class="logo" src="/ressources/logo.png" alt="logo"></img>
+                    </a>
+                </div>
+                <div class="open-filter" onclick="closeForm()">
+                    <img class="filter" src="/ressources/filtre.png"></img>
+                </div>
+                <div class="search-bar">
+                    <form action="/api/client/HomeSearch" method="post">
+                        <input name="barreSearch" class="barre" id="barre" placeholder="Find your plant !">
+                        <button type="submit" class="search-btn"
+                            onclick="findPlant(getElementById('barre').value)"><img src="/ressources/search.png"></img></button>
                     </form>
-                    <script type="text/javascript" src="/js/filter/doubleRange.js"></script>
-                    <script type="text/javascript">
-                        setDoubleRange({
-                            element: '#doubleRange',
-                            minValue: 0,
-                            maxValue: 150,
-                            stepValue: 1,
-                            defaultMinValue: 5,
-                            defaultMaxValue: 100,
-                            unite: '$'
-                        });
-                        function closeForm() {
-                            if (document.getElementById("popupForm").style.display == "none") {
-                                document.getElementById("popupForm").style.display = "block";
-                            }
-                            else {
-                                document.getElementById("popupForm").style.display = "none";
-                            }
-                        }
-                        function findPlant(e){
-                            searchPlant(e);
-                        }
-                    </script>
+                </div>
+                <div class="profile">
+                    <a href="/api/client/Profile">
+                        <img class="account" src="/ressources/Account.png" alt="account"></img>
+                    </a>
                 </div>
                 <div class="shop">
                     <a href="">
                         <img class="cart" src="/ressources/Cart.png" alt="cart"></img>
                     </a>
                 </div>
+            </nav>
+        </header>
+        <div class="loginPopup">
+            <div class="formPopup" id="popupForm">
+                <form action="/api/client/Homefilter" class="formContainer" method="post">
+                    <button type="button" class="btn_cancel" onclick="closeForm()">X</button>
+                    <div id="doubleRange" class="doubleRange">
+                        <div class="barre">
+                            <div class="barreMilieu" style="width:50%; left:25%;"></div>
+                            <div class="t1 thumb" style="left:25%"></div>
+                            <div class="t2 thumb" style="left:75%;"></div>
+                        </div>
+                        <div class="labelMin">$0</div>
+                        <div class="labelMax">$150</div>
+                        <input type="hidden" name="pmin" value="" class="inputMin" />
+                        <input type="hidden" name="pmax" value="" class="inputMax" />
+                    </div>
+                    <div class="select-container">
+                        <div>
+                            <select name="typePlant" class="select-plant">
+                                <option value="">Select your type
+                                <option value="Tree">Tree
+                                <option value="Cactus">Cactus
+                                <option value="Flower">Flower
+                                <option value="Cane plant">Cane plant
+                                <option value="Carnivorous">Carnivorous
+                                <option value="Fruit plant">Fruit plant
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="submit-btn">Add filter</button>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript" src="/js/filter/doubleRange.js"></script>
+                <script type="text/javascript">
+                    setDoubleRange({
+                        element: '#doubleRange',
+                        minValue: 0,
+                        maxValue: 150,
+                        stepValue: 1,
+                        defaultMinValue: 5,
+                        defaultMaxValue: 100,
+                        unite: '$'
+                    });
+                    function closeForm() {
+                        if (document.getElementById("popupForm").style.display == "none") {
+                            document.getElementById("popupForm").style.display = "block";
+                            document.querySelector(".overlay").style.pointerEvents = "none";
 
-            <div class="profile">
-                <a href = "/api/client/Profile">
-                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
-                </a>
-            </div>
-
-            </div>
-        </nav>
-
-    </header>
-    <section class="display">
-        <div id="app">
-            <div class = "plant-container">
-                <div class="plant" v-for="(image, index) in images" v-on:click="goToPlant(index)">
-                        <img v-bind:src="path + image">
-                        <p class="names"> {{names[index]}} </p>
-                        <p class="prices">{{prices[index]}}  </p>
-                </div>  
+                        }
+                        else {
+                            document.getElementById("popupForm").style.display = "none";
+                            document.querySelector(".overlay").style.pointerEvents = "all";
+                        }
+                    }
+                    function findPlant(e) {
+                        searchPlant(e);
+                    }
+                </script>
             </div>
         </div>
+        <section class="display">
+            <div id="app">
+                <div class="plant-container">
+                    <div class="plant" v-for="(image, index) in images" v-on:click="goToPlant(index)">
+                        <img v-bind:src="path + image">
+                        <p class="names"> {{names[index]}} </p>
+                        <p class="prices">{{prices[index]}} </p>
+                    </div>
+                </div>
+            </div>
+    </div>
     </section>
 
     <script type="importmap">
@@ -117,33 +127,33 @@
         import { createApp } from 'vue'
 
         createApp({
-        data() {
-            return {
-                path: "/ressources/plantViews/",
-                images: [],
-                prices: [],
-                names: [],
-                selectedPlant: 0
+            data() {
+                return {
+                    path: "/ressources/plantViews/",
+                    images: [],
+                    prices: [],
+                    names: [],
+                    selectedPlant: 0
+                }
+            },
+            methods: {
+                initializePlants() {
+                    let index = 1
+                    "<% plants.forEach(plant => { %>"
+                    this.prices.push("$<%= plant.price %>")
+                    this.names.push("<%= plant.name %>")
+                    this.images.push("img" + "<%= plant.idplants %>" + ".png")
+                    index++
+                    "<% }); %>"
+                }, goToPlant(index) {
+                    location.href = "/api/plants/" + this.names[index]
+                }
+            },
+            beforeMount() {
+                this.initializePlants()
             }
-          },
-        methods: {
-            initializePlants(){
-                let index = 1
-                "<% plants.forEach(plant => { %>"
-                 this.prices.push("$<%= plant.price %>")
-                 this.names.push("<%= plant.name %>")
-                 this.images.push("img"+"<%= plant.idplants %>"+".png")
-                 index ++
-                "<% }); %>"
-            },goToPlant(index){
-                location.href="/api/plants/"+this.names[index]
-        }
-        },
-        beforeMount(){
-            this.initializePlants()
-        }
         }).mount('#app')
-      </script>
+    </script>
     <footer></footer>
 </body>
 

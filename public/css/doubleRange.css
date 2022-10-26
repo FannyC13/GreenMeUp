@@ -1,44 +1,122 @@
-.doubleRange{ width:125px; margin:10px 0; padding-top:13px; margin: 50px; margin-top: 10px;}
-.doubleRange .barre{ width:400%; height:6px; background-color:grey; border-radius:3px; position:relative; margin-bottom: 5px;}
-.doubleRange .barre .barreMilieu{ height:6px; background-color:#1b9c35; position:absolute; }
-.doubleRange .barre .thumb{ width:15px; height:15px; background-color:white; border:1px solid grey; border-radius:50%; top:-5px; position:absolute; cursor:pointer; transform:translateX(-13px); }
-.doubleRange .label{ margin-top:15px; color:#131212; font-weight:bold; user-select:none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:ital,wght@1,700&display=swap');
+
+.doubleRange{ 
+  width:100%; 
+  pointer-events: all;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.doubleRange .barre{ 
+  width:80%;
+  margin-top: 9vh; 
+  height:6px; 
+  background-color:white;
+  border-radius:3px; 
+  position:relative; 
+  
+}
+
+.doubleRange .barre .barreMilieu{ 
+  height:6px; 
+  background-color:black; 
+  position:absolute; 
+}
+
+.doubleRange .barre .thumb{ 
+  width:15px; 
+  height:15px; background-color:white; 
+  border:1px solid grey; 
+  border-radius:50%; 
+  top:-5px; 
+  position:absolute; 
+  cursor:pointer; 
+  transform:translateX(-13px); 
+}
+.doubleRange .label{  
+  color:#131212; 
+  font-weight:bold; 
+  user-select:none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; }
 
 
 .formPopup {
     display: none;
-    position: fixed;
-    left: 45%;
-    top: 5%;
-    transform: translate(-50%, 10%);
-    border: 6px solid #999999;
     z-index: 9;
     height: 300px;
-    width: 600px;
+    width: 100%;
     border-radius: 32px;
   }
   .formContainer {
     padding: auto;
-    background-color: #fff;
-    height: 292px;
-    width: 600px;
-    border-radius: 20px;
+    height: 45vh;
+    position: relative;
+    background-color: rgb(230, 230, 230);
   }
 
   .btn_cancel{
-    margin-left: 210px;
-    margin-top: 20px;
-    width: 30%;
-    font-size: 17px;
-    background-color: #6DBF6A;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 20px;
     border-radius: 10px;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-  }
-  #typePlant{
-    margin-left: 200px;
+    pointer-events: all;
   }
   .labelMax{
-    margin-top: -20px;
-    margin-left: 470px;
+    position: absolute;
+    right: 6vw;
+    top:11vh;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+
   }
 
+  .labelMin{
+    position: absolute;
+    left: 6vw;
+    top:11vh;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+  }
+
+.overlay{
+    pointer-events: all;
+}
+
+.select-plant{
+    padding: 10px;
+    border: none;
+    margin-top: 10vh;
+    pointer-events: all;
+    border-radius: 5px;
+}
+
+.select-plant:focus{
+  outline: none;
+}
+
+.select-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-btn{
+  padding: 10px;
+  pointer-events: all;
+  margin-left: 5px;
+  margin-top: 67px;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+}
