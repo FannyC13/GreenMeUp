@@ -25,6 +25,7 @@ body{
 }
 
 
+
 .mini-view img{
     cursor: pointer;
     width: 7.5vw;
@@ -38,12 +39,22 @@ body{
 
 .view img{
     width: 45vw;
-    height: auto;
+    height: 100%;
+    max-height: 700px;
+    object-fit: cover;
+    object-position: center;
+
 
 }
 
 .infos-container{
-    padding: 0 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.infos{
+    width: 80%;
 }
 
 .plant-name{
@@ -57,4 +68,105 @@ body{
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: 300;
+}
+
+.description{
+    margin-top: 5vh;
+    font-size: 20px;
+}
+
+.delivery{
+    margin-top: 6vh;
+    display: flex;
+    flex-direction: row;
+    border: solid 1px black;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+}
+
+.method img{
+    width: 20%;
+    padding: 35px 20px 15px 20px;
+}
+
+.method-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.method-desc{
+    text-align: center;
+}
+
+.method-desc p {
+    font-size: 12px;
+    padding-bottom: 10%
+}
+
+.quantity{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 8vh;
+
+}
+
+.quantity-controller{
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.stock{
+    font-size: 10px;
+    padding-left: 10px;
+}
+
+.btn-plus{
+    padding: 7px;
+
+}
+
+.btn-minus{
+    padding: 7px 8.5px;
+}
+
+.btn-plus,.btn-minus{
+    background-color: rgba(235, 235, 235, 0.573);
+    border: 1px solid black;
+}
+
+.btn-plus:hover,.btn-minus:hover{
+    cursor: pointer;
+    background-color: rgba(210, 210, 210, 0.573) ;
+}
+
+.desired-quantity{
+    border: 1px solid black;
+    padding: 7px;
+}
+
+
+.desired-quantity{
+    border: 1px solid black;
+}
+
+.bag{
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    position:absolute;
+    bottom: 1vh;
+    padding: 4px 0;
+    width: 80%;
+}
+
+.bag:hover{
+    cursor: pointer;
+    background-color: rgb(72, 69, 69);
 }

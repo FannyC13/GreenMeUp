@@ -19,7 +19,7 @@ app.get('/create-account',function(req,res){
     res.render('create-account')
 })
 
-app.listen('3000',()=>{
-    console.log('Server started at port 3000')
+app.listen('1010',()=>{
+    console.log('Server started at port 1010')
 })
 

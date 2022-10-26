@@ -50,18 +50,59 @@
                 </div>
             </div>
             <div class="infos-container">
-                <div class="title">
-                    <p class="plant-name"><%- plant.name %></p>
-                    <p class="plant-price">$"<%- plant.price %>"</p>
-                </div>
-                <div class="description">
-                    <p><%= plant.description %></p>
-                </div>
-                <div class="delivery">
-                    delivery
-                </div>
-                <div class="cart">
-                    cart
+                <div class="infos">
+                    <div class="title">
+                        <p class="plant-name"><%- plant.name %></p>
+                        <p class="plant-price">$<%- plant.price %></p>
+                    </div>
+                    <div class="description">
+                        <p><%= plant.description %></p>
+                    </div>
+                    <div class="delivery">
+                        <div class="method">
+                            <div class="method-header">
+                                <img src="/ressources/Store.png"></img>
+                                <p>Store pick-up</p>
+                            </div>
+                            <div class="method-desc">
+                                <p>Available within 1 - 2 Days <br> FREE</p>
+                            </div>
+                        </div>
+                        <p>or</p>
+                        <div class="method">
+                            <div class="method-header">
+                                <img src="/ressources/deliver.png"></img>
+                                <p>Store pick-up</p>
+                            </div>
+                            <div class="method-desc">
+                                <p>Available within 1 - 5 Days <br> $3.99</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart">
+                        <div class="quantity">
+                            <div class="quantity-display">
+                                <p>Quantity</p>
+                                <p class="stock" v-if="stock > 0"><i>{{stock}} in stock</i></p>
+                                <p class="stock" v-else="stock = 0"><i>Sold out</i></p>
+                            </div>
+                            <div class="quantity-controller">
+                                <div class="btn-minus" v-on:click="removeFromCart">
+                                    -
+                                </div>
+                                <div class="desired-quantity">
+                                    {{qty}}
+                                </div>
+                                <div class="btn-plus" v-on:click="addToCart">
+                                    +
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bag">
+                            <p>ADD TO BAG</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -82,12 +123,22 @@
             return {
                 path: "/ressources/miniPlantViews/",
                 image: "img"+"<%= plant.idplants %>",
-                selectedVariant: 1
+                selectedVariant: 1,
+                qty: 0,
+                stock: "<%= plant.stock %>"
             }
           },
         methods: {
             updateVariant(index){
                 this.selectedVariant = index
+            },removeFromCart(){
+                if(this.qty > 0){
+                    this.qty -= 1
+                }
+            },addToCart(){
+                if(this.qty < this.stock){
+                    this.qty += 1
+                }
             }
         },
         beforeMount(){
