@@ -84,10 +84,11 @@
                     </a>
                 </div>
 
-                <div class="profile">
-                    <img class="account" src="/ressources/Account.png" onclick="window.location='/api/client/Profile'"
-                        alt="account"></img>
-                </div>
+            <div class="profile">
+                <a href = "/api/client/Profile">
+                    <img class = "account" src="/ressources/Account.png" alt="account"></img>
+                </a>
+            </div>
 
             </div>
         </nav>
@@ -95,12 +96,12 @@
     </header>
     <section class="display">
         <div id="app">
-            <div class="plant-container">
-                <div class="plant" v-for="(image, index) in images">
-                    <img v-bind:src="path + image">
-                    <p class="names"> {{names[index]}} </p>
-                    <p class="prices">{{prices[index]}} </p>
-                </div>
+            <div class = "plant-container">
+                <div class="plant" v-for="(image, index) in images" v-on:click="goToPlant(index)">
+                        <img v-bind:src="path + image">
+                        <p class="names"> {{names[index]}} </p>
+                        <p class="prices">{{prices[index]}}  </p>
+                </div>  
             </div>
         </div>
     </section>
@@ -117,34 +118,33 @@
         import { createApp } from 'vue'
 
         createApp({
-            data() {
-                return {
-                    path: "/ressources/",
-                    images: [],
-                    prices: [],
-                    names: []
-                }
-            },
-            methods: {
-                initializePlants() {
-                    let index = 1
-                    "<% plants.forEach(plant => { %>"
-                    this.prices.push("$<%= plant.price %>")
-                    this.names.push("<%= plant.name %>")
-                    this.images.push("img" + index + ".png")
-                    index++
-                    "<% }); %>"
-                }
-            },
-            beforeMount() {
-                this.initializePlants()
+        data() {
+            return {
+                path: "/ressources/plantViews/",
+                images: [],
+                prices: [],
+                names: [],
+                selectedPlant: 0
             }
+          },
+        methods: {
+            initializePlants(){
+                let index = 1
+                "<% plants.forEach(plant => { %>"
+                 this.prices.push("$<%= plant.price %>")
+                 this.names.push("<%= plant.name %>")
+                 this.images.push("img"+"<%= plant.idplants %>"+".png")
+                 index ++
+                "<% }); %>"
+            },goToPlant(index){
+                location.href="/api/plants/"+this.names[index]
+        }
+        },
+        beforeMount(){
+            this.initializePlants()
+        }
         }).mount('#app')
-    </script>
-
-    <script>
-
-    </script>
+      </script>
     <footer></footer>
 </body>
 
