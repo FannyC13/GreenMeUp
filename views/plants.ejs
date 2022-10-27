@@ -53,7 +53,7 @@
                 <div class="infos">
                     <div class="title">
                         <p class="plant-name"><%- plant.name %></p>
-                        <p class="plant-price">$<%- plant.price %></p>
+                        <p class="plant-price">$<%- plant.price.toFixed(2) %></p>
                     </div>
                     <div class="description">
                         <p><%= plant.description %></p>
@@ -146,7 +146,7 @@
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         idplants: "<%= plant.idplants%>",
-                        price: "<%= plant.price %>",
+                        price: "<%= plant.price.toFixed(2) %>",
                         name: "<%= plant.name %>",
                         user: "<%= client.mail %>",
                         qty: this.qty

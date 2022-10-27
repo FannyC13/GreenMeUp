@@ -11,8 +11,8 @@ router.use(express.urlencoded({extended:false}))
 router.get('/cart', (req,res) =>{
     const select = cartQuery.selectOrder(1, userdata.mail);
     select.then(cart => {
-        if(order.status === "success"){
-            res.render('cart',{ cart : cart.data, client: userdata})
+        if(cart.status === "success"){
+            res.render('cart',{cart: cart.data, client: userdata})
         }else{
             console.log(order.status)
         }
