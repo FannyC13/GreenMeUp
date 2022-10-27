@@ -59,3 +59,12 @@ body{
     font-weight: bold;
     color:#225e20
 }
+.search-btn{
+    cursor: pointer;
+}
+.open-filter{
+    cursor: pointer;
+}
+.submit-btn{
+    cursor: pointer;
+}

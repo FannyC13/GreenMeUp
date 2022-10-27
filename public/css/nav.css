@@ -54,22 +54,23 @@ nav{
     pointer-events: all;
 }
 
-.search-bar form{
+.search-bar .form{
     display: flex;
     flex-direction: row;
     margin-top: 22px;
     justify-content: center;
     pointer-events: all;
-    margin-left: 12vw;
+    margin-left: 8vw;
 }
+
 
 .search-bar input{
     font-family: 'Roboto', sans-serif;
     border: none;
     border-radius:10px;
-    width: 40%;
+    width: 40vW;
     margin-left: 8%;
-    padding: 6px 40vw 6px 5px;
+    padding: 6px 10px 6px 8px;
 }
 
 .search-btn{
