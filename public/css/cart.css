@@ -193,7 +193,7 @@ body{
     padding: 3px 5px;
 }
 
-.plant-footer{
+.plant-footer{ 
     display: flex;
     flex-direction: row;
 }
