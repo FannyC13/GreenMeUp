@@ -12,10 +12,11 @@ router.get('/', function(req,res){
     db.select().from('client').orderBy('mail').then(function(data){
         res.send(data);
 });
-});
 
-router.post('/createUser', async (req,res) =>{
-    try{
+
+
+router.post('/createUser', async (req, res) => {
+    try {
         const hashedPasswords = await bcrypt.hash(req.body.password, 10)
         const create = clients.createUser(req.body.lastname, req.body.firstname, req.body.mail, hashedPasswords)
         create.then(user => {
