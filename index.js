@@ -3,6 +3,7 @@ const app = express();
 const apiRoute = require('./routes/api')
 app.use(express.json());
 const path = require('path');
+var userdata = null;
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')

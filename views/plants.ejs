@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="shop">
-                <a href ="" >
+                <a href ="/api/client/cart" >
                     <img class = "cart" src="/ressources/Cart.png" alt="cart"></img>
                 </a>
             </div>
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bag">
+                        <div class="bag" v-on:click="bag">
                             <p>ADD TO BAG</p>
                         </div>
                     </div>
@@ -139,11 +139,22 @@
                 if(this.qty < this.stock){
                     this.qty += 1
                 }
+            },
+            bag(){
+                const request = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        idplants: "<%= plant.idplants%>",
+                        price: "<%= plant.price %>",
+                        name: "<%= plant.name %>",
+                        user: "<%= client.mail %>",
+                        qty: this.qty
+                    })
+                }
+                fetch("http://localhost:1010/api/client/cart", request)
             }
         },
-        beforeMount(){
-            console.log(this.path + "img"+"<%= plant.idplants %>"+".1.png")
-        }
         }).mount('#app')
       </script>
 </body>

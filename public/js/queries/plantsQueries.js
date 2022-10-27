@@ -36,6 +36,7 @@ const searchPlant = async (name) => {
     }
 }
 
+
 exports.selectAllPlants = selectAllPlants;
 exports.selectPlants = selectPlants;
 exports.searchPlant = searchPlant;
