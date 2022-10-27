@@ -140,7 +140,7 @@
                 initializePlants() {
                     let index = 1
                     "<% plants.forEach(plant => { %>"
-                    this.prices.push("$<%= plant.price %>")
+                    this.prices.push("$<%= plant.price.toFixed(2) %>")
                     this.names.push("<%= plant.name %>")
                     this.images.push("img" + "<%= plant.idplants %>" + ".png")
                     index++
