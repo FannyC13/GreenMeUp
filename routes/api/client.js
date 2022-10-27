@@ -17,7 +17,6 @@ router.get('/cart', (req,res) =>{
             console.log(order.status)
         }
     })
-    
 })
 
 router.get('/', function(req,res){
