@@ -6,11 +6,24 @@ const plantsQuery = require('../../public/js/queries/plantsQueries')
 const cartQuery = require('../../public/js/queries/cartQueries')
 const bcrypt = require('bcrypt');
 router.use(express.urlencoded({extended:false}))
-var userdata = null;
+
+
+router.get('/cart', (req,res) =>{
+    const select = cartQuery.selectOrder(1, userdata.mail);
+    select.then(cart => {
+        if(order.status === "success"){
+            res.render('cart',{ cart : cart.data, client: userdata})
+        }else{
+            console.log(order.status)
+        }
+    })
+    
+})
 
 router.get('/', function(req,res){
     db.select().from('client').orderBy('mail').then(function(data){
         res.send(data);
+    })
 });
 
 
