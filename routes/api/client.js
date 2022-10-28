@@ -14,7 +14,7 @@ router.get('/cart', (req,res) =>{
         if(cart.status === "success"){
             res.render('cart',{cart: cart.data, client: userdata})
         }else{
-            console.log(order.status)
+            console.log(cart.status)
         }
     })
     
@@ -143,8 +143,7 @@ router.post('/DeleteClient', async (req,res) => {
 })
 
 router.post('/cart', async (req,res)=>{
-    const insert = cartQuery.insertOrder(1, req.body.user, req.body.idplants, req.body.price, req.body.qty, req.body.name);
-    
+    const check = cartQuery.checkOrder(1,req.body.user,req.body.idplants,req.body.price, req.body.qty, req.body.name)
 })
 
 
