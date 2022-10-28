@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:ital,wght@1,700&display=swap');
+
+body{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    image-rendering: optimizeQuality;
+}
+.imagecontainer{
+    width: 100%;
+    text-align: center;
+}
+.image404{
+    width: 300px;
+}
+
+p{
+    text-align: center;
+    font-style: oblique;
+}
+.error{
+    font-size: 60px;
+    opacity: 0.3;
+}
+.message{
+    font-size: 30px;
+}

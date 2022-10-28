@@ -44,7 +44,7 @@
         </header>
         <div class="loginPopup">
             <div class="formPopup" id="popupForm">
-                <form action="/api/client" class="formContainer" method="post">
+                <form action="/api/client/home" class="formContainer" method="post">
                     <button type="button" class="btn_cancel" onclick="closeForm()">X</button>
                     <div id="doubleRange" class="doubleRange">
                         <div class="barre">
@@ -115,7 +115,7 @@
             <div id="app">
                 <div class="plant-container">
                     <div class="plant" v-for="(image, index) in images" v-on:click="goToPlant(index)">
-                        <img v-bind:src="path + image">
+                        <img :src="path + image">
                         <p class="names"> {{names[index]}} </p>
                         <p class="prices">{{prices[index]}} </p>
                     </div>
