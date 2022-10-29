@@ -143,7 +143,6 @@
                             this.images.push("img" + "<%= order.idplants %>" + ".1.png")
                             this.qtys.push(Number("<%= order.quantity %>"))
                             this.idplants.push("<%= order.idplants%>")
-                            this.stock.push("<%= order.stock %>")
                             this.total.push(("<%= order.quantity %>"*"<%= order.price %>").toFixed(2))
                             "<% }); %>"
                         },
@@ -157,9 +156,20 @@
                                 name: name,
                                 user: user,
                                 qty: qty
-                        })
-                        }
-                    }
+                        }),
+                        } 
+                        fetch("http://localhost:1010/api/client/cart", request)
+                        },
+                        removeFromCart(index){
+                            if(this.qty > 1){
+                                this.qty -= 1
+                            }
+                           this.updatesql(this.idplants[index],this.prices[index],this.names[index],"<%= client.mail%>",this.qtys[index])
+                        },
+                        addToCart(index){
+                            this.qtys[index]+=1
+                            this.updatesql(this.idplants[index],this.prices[index],this.names[index],"<%= client.mail%>",this.qtys[index])
+                        },
                 },
                     beforeMount() {
                         this.initializeCart()

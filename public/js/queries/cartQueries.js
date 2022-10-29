@@ -12,7 +12,7 @@ const checkOrder = async (idcart, mail , idplants, price, quantity, name) => {
             }
           })
           if(alreadyOrdered){
-            updateOrder(idcart, mail , idplants, price,quantity,name)
+            updateOrder(idcart,mail ,idplants,price,quantity,name)
           }else{
             insertOrder(idcart, mail , idplants, price,quantity,name)
           }
