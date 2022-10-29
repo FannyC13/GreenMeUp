@@ -1,6 +1,14 @@
 const  db = require('../../../database');
 
-
+const checkSelect = async ( mail) => {
+  try{
+    const checkS = await db('cart').select('idcart').where({mail:mail})
+    return checkS
+    
+  }catch(e){
+    return e.toString()
+  }
+}
 const checkOrder = async (idcart, mail , idplants, price, quantity, name) => {
     try{
         var alreadyOrdered = false
@@ -12,9 +20,9 @@ const checkOrder = async (idcart, mail , idplants, price, quantity, name) => {
             }
           })
           if(alreadyOrdered){
-            updateOrder(idcart,mail ,idplants,price,quantity,name)
+            updateOrder(idcart ,mail ,idplants,price,quantity,name)
           }else{
-            insertOrder(idcart, mail , idplants, price,quantity,name)
+            insertOrder(idcart , mail , idplants, price,quantity,name)
           }
         })
       }catch(e){
@@ -75,3 +83,4 @@ exports.updateOrder = updateOrder;
 exports.checkOrder = checkOrder;
 exports.insertOrder = insertOrder;
 exports.selectOrder = selectOrder;
+exports.checkSelect = checkSelect;

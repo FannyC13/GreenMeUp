@@ -33,6 +33,9 @@
                 <div class="cart-container">
                     <div class="plant-container">
                         <div class="plant-display" v-for="(image,index) in images">
+                            <div class="cross" v-on:click="test()">
+                                <img  src="/ressources/cross.png"></img>
+                            </div>
                             <div class="mini-view">
                                 <img v-bind:src="path + image"></img>
                             </div>
@@ -90,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="order-footer">
-                                <div class="checkout-btn">
+                                <div class="checkout-btn" v-on:click="Checkout()">
                                     <p>CHECKOUT</p>
                                 </div>
                             </div>
@@ -133,7 +136,7 @@
                             stock:[],
                             idplants:[],
                             total: [],
-                            finaltotal: Number(0)
+                            finaltotal: Number(0),
                         }
                     },
                     methods: {
@@ -148,9 +151,22 @@
                             this.finaltotal += (Number("<%= order.quantity %>"*"<%= order.price %>"))
                             "<% }); %>"
                         },
+                        Checkout(){
+                            const del = {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                user: "<%= client.mail %>",
+                                delete: 1
+                        }),
+                        }
+                        fetch("http://localhost:1010/api/client/cart", del)
+                        this.images =[],
+                        this.finaltotal = 0
+                        },
                         updatetotal(prev, next){
                             this.finaltotal = this.finaltotal -prev + next
-                            
+
                         },
                         removeFromCart(index){
 
@@ -159,7 +175,7 @@
                                 var prev = this.total[index] 
                                 this.total[index] = this.qtys[index] * this.prices[index]
                                 this.updatetotal(prev, this.total[index])
-                               
+                                
                             }
                         },                            
                         addToCart(index){
@@ -167,6 +183,7 @@
                             var prev = this.total[index] 
                             this.total[index] = this.qtys[index] * this.prices[index]
                             this.updatetotal(prev, this.total[index])
+
                         },
                 },
                     beforeMount() {

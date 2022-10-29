@@ -5,17 +5,25 @@ const clients = require('../../public/js/queries/clientQueries')
 const plantsQuery = require('../../public/js/queries/plantsQueries')
 const cartQuery = require('../../public/js/queries/cartQueries')
 const bcrypt = require('bcrypt');
+var idcart = 1;
 router.use(express.urlencoded({ extended: false }))
 
 
 
 
-router.get('/cart', (req, res) => {
+router.get('/cart', async (req, res) => {
     if (userdata == null) {
         res.redirect('/')
     }
-    else {
-        const select = cartQuery.selectOrder(1, userdata.mail);
+    else { 
+        idcart = 1;
+        const check = await cartQuery.checkSelect(userdata.mail)
+        check.forEach(element => {
+           if(idcart < element.idcart){
+             idcart = element.idcart
+           }
+        });
+        const select = cartQuery.selectOrder(idcart, userdata.mail);
         select.then(cart => {
             if (cart.status === "success") {
                 res.render('cart', { cart: cart.data, client: userdata })
@@ -149,8 +157,12 @@ router.post('/DeleteClient', async (req, res) => {
 router.post('/cart', async (req, res) => {
     if (userdata == null) {
         res.redirect('/')
-    } else {
-        const check = cartQuery.checkOrder(1, req.body.user, req.body.idplants, req.body.price, req.body.qty, req.body.name)
+    } else if(req.body.delete == 1){
+        idcart +=1
+    }
+    else
+    {
+        const check = cartQuery.checkOrder(idcart, req.body.user, req.body.idplants, req.body.price, req.body.qty, req.body.name)
     }
 })
 
