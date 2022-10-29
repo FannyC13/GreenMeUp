@@ -124,7 +124,7 @@
                 path: "/ressources/miniPlantViews/",
                 image: "img"+"<%= plant.idplants %>",
                 selectedVariant: 1,
-                qty: 0,
+                qty: 1,
                 stock: "<%= plant.stock %>"
             }
           },
@@ -132,7 +132,7 @@
             updateVariant(index){
                 this.selectedVariant = index
             },removeFromCart(){
-                if(this.qty > 0){
+                if(this.qty > 1){
                     this.qty -= 1
                 }
             },addToCart(){
@@ -149,6 +149,7 @@
                         price: "<%= plant.price.toFixed(2) %>",
                         name: "<%= plant.name %>",
                         user: "<%= client.mail %>",
+                        stock: "<%= plant.stock%>",
                         qty: this.qty
                     })
                 }

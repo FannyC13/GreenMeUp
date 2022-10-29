@@ -12,6 +12,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     image-rendering: optimizeQuality;
+    background-color: white;
 }
 
 
@@ -29,12 +30,12 @@ body{
 
 .plant-display{
     margin: 0 25px 25px 25px;
-    border: 2px solid rgb(159, 159, 159);
+    border: 1px solid black;
     display: flex;
     flex-direction: row;
     position: relative;
     border-radius: 20px;
-    background-color: rgb(240, 240, 240);
+    background-color: #f5f4f4;
 }
 
 .checkout-container{
@@ -43,10 +44,10 @@ body{
 
 .order-summary{
     border-radius: 15px;
-    border: 2px solid rgb(159, 159, 159);
+    border: 1px solid black;
     margin: auto;
     width: 90%;
-    background-color: rgb(240, 240, 240);
+    background-color: #f5f4f4;
 }
 
 .order-header{
@@ -76,7 +77,6 @@ body{
 
 .price{
     position: absolute;
-    right: 20px;
     font-weight: bold;
     font-size: 16px;
 }
@@ -206,4 +206,25 @@ body{
 .plant-display:hover{
     cursor: pointer;
     box-shadow: red;
+}
+
+.cross img{
+    width: 15px;
+    height: auto;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.order-summary .price{
+    right: 20px;
+}
+
+.plant-header .price{
+    right: 40px;
+}
+
+.plant-display:hover{
+    transition: 0.2s;
+    transform: scale(1.05);
 }
