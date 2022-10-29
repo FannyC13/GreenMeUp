@@ -1,168 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/cart.css">
-    <title>My cart</title>
-</head>
-
-<body>
-    <header>
-        <nav>
-            <div class="home">
-                <a href="/api/client/home">
-                    <img class="logo" src="/ressources/logo.png" alt="logo"></img>
-                </a>
-            </div>
-            <div class="profile">
-                <a href="/api/client/Profile">
-                    <img class="account" src="/ressources/Account.png" alt="account"></img>
-                </a>
-            </div>
-            <div class="shop">
-                <a href="/api/client/cart">
-                    <img class="cart" src="/ressources/Cart.png" alt="cart"></img>
-                </a>
-            </div>
-        </nav>
-    </header>
-    <div id="app">
-        <section>
-            <div class="cart-container">
-                <div class="plant-container">
-                    <div class="plant-display" v-for="(image,index) in images">
-                        <div class="cross">
-                            <img src="/ressources/cross.png"></img>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/cart.css">
+        <title>My cart</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="home">
+                    <a href="/api/client/home">
+                        <img class="logo" src="/ressources/logo.png" alt="logo"></img>
+                    </a>
+                </div>
+                <div class="profile">
+                    <a href="/api/client/Profile">
+                        <img class="account" src="/ressources/Account.png" alt="account"></img>
+                    </a>
+                </div>
+                <div class="shop">
+                    <a href="/api/client/cart">
+                        <img class="cart" src="/ressources/Cart.png" alt="cart"></img>
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div id="app">
+            <section>
+                <div class="cart-container">
+                    <div class="plant-container">
+                        <div class="plant-display" v-for="(image,index) in images">
+                            <div class="mini-view">
+                                <img v-bind:src="path + image"></img>
+                            </div>
+                            <div class="plant-info">
+                                <div class="plant-header">
+                                    <div class="row">
+                                        <p>{{names[index]}}</p>
+                                        <p class ="price">${{total[index]}}</p>
+                                    </div>
+                                    <p>${{prices[index]}}</p>
+                                </div>
+                                <div class="plant-footer">
+                                    <div class="quantity">
+                                        Quantity
+                                    </div>
+                                    <div class="quantity-controller">
+                                        <div class="btn-minus" v-on:click="removeFromCart(index)">
+                                            -
+                                        </div>
+                                        <div class="desired-quantity">
+                                            {{qtys[index]}}
+                                        </div>
+                                        <div class="btn-plus" v-on:click="addToCart(index)">
+                                            +
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mini-view">
-                            <img v-bind:src="path + image"></img>
-                        </div>
-                        <div class="plant-info">
-                            <div class="plant-header">
+                    </div>
+                    <div class="checkout-container">
+                        <div class="order-summary">
+                           <div class="order-header">
+                               <p>Order summary</p>
+                           </div> 
+                           <div class="order-body">
                                 <div class="row">
-                                    <p>{{names[index]}}</p>
-                                    <p class="price">${{total[index]}}</p>
+                                    <p>Item subtotal</p>
+                                    <p class ="price">$<%= cart[0].price%></p>
                                 </div>
-                                <p>{{prices[index]}}</p>
+                                <div class="row">
+                                    <p>Shipping</p>
+                                    <p class ="price">Shipping fee</p>
+                                </div>
+                                <div class="row">
+                                    <p>Tax</p>
+                                    <p class ="price">Tax fee</p>
+                                </div>
+                                <div class="line">
+                                    <span class="separator"></span>
+                                </div>
+                                <div class="row" id="total">
+                                    <p>Total</p>
+                                    <p class ="price">total fee</p>
+                                </div>
                             </div>
-                            <div class="plant-footer">
-                                <div class="quantity">
-                                    Quantity
+                            <div class="order-footer">
+                                <div class="checkout-btn">
+                                    <p>CHECKOUT</p>
                                 </div>
-                                <div class="quantity-controller">
-                                    <div class="btn-minus" v-on:click="removeFromCart(index)">
-                                        -
-                                    </div>
-                                    <div class="desired-quantity">
-                                        {{qtys[index]}}
-                                    </div>
-                                    <div class="btn-plus" v-on:click="addToCart(index)">
-                                        +
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-display">
+                            <div class="checkout-display-title">
+                                We accept
+                            </div>
+                            <div class="checkout-display-images">
+                               <img src="/ressources/checkoutMethods/Paypal.png"></img>
+                               <img src="/ressources/checkoutMethods/GPay.png"></img>
+                               <img src="/ressources/checkoutMethods/Visa.png"></img>
+                               <img src="/ressources/checkoutMethods/Mastercard.png"></img>
+                               <img src="/ressources/checkoutMethods/AmericanExpress.png"></img>
+                               <img src="/ressources/checkoutMethods/Venmo.png"></img>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="checkout-container">
-                    <div class="order-summary">
-                        <div class="order-header">
-                            <p>Order summary</p>
-                        </div>
-                        <div class="order-body">
-                            <div class="row">
-                                <p>Item subtotal</p>
-                                <p class="price">$<%= cart[0].price%>
-                                </p>
-                            </div>
-                            <div class="row">
-                                <p>Shipping</p>
-                                <p class="price">Shipping fee</p>
-                            </div>
-                            <div class="row">
-                                <p>Tax</p>
-                                <p class="price">Tax fee</p>
-                            </div>
-                            <div class="line">
-                                <span class="separator"></span>
-                            </div>
-                            <div class="row" id="total">
-                                <p>Total</p>
-                                <p class="price">total fee</p>
-                            </div>
-                        </div>
-                        <div class="order-footer">
-                            <div class="checkout-btn">
-                                <p>CHECKOUT</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="checkout-display">
-                        <div class="checkout-display-title">
-                            We accept
-                        </div>
-                        <div class="checkout-display-images">
-                            <img src="/ressources/checkoutMethods/Paypal.png"></img>
-                            <img src="/ressources/checkoutMethods/GPay.png"></img>
-                            <img src="/ressources/checkoutMethods/Visa.png"></img>
-                            <img src="/ressources/checkoutMethods/Mastercard.png"></img>
-                            <img src="/ressources/checkoutMethods/AmericanExpress.png"></img>
-                            <img src="/ressources/checkoutMethods/Venmo.png"></img>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <script type="importmap">
+            </section>
+            <script type="importmap">
                 {
                   "imports": {
                     "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
                   }
                 }
               </script>
-
-        <script type="module">
-            import { createApp } from 'vue'
-
-            createApp({
-                data() {
-                    return {
-                        path: "/ressources/miniPlantViews/",
-                        images: [],
-                        prices: [],
-                        names: [],
-                        qtys: [],
-                        total: [],
-                        stock: []
-                    }
-                },
-                methods: {
-                    initializeCart() {
-                        "<% cart.forEach(order => { %>"
-                        this.prices.push("$<%= order.price %>")
-                        this.names.push("<%= order.name %>")
-                        this.images.push("img" + "<%= order.idplants %>" + ".1.png")
-                        this.qtys.push("<%= order.quantity %>")
-                        this.total.push(("<%= order.quantity %>" * "<%= order.price %>").toFixed(2))
-                        console.log("<%= order.stock %>")
-                        this.stock.push("<%= order.stock %>")
-                        "<% }); %>"
-                    }, removeFromCart(index) {
-                        if (this.qtys[index] > 1) {
-                            this.qtys[index] -= 1
-
+        
+            <script type="module">
+                import { createApp } from 'vue'
+        
+                createApp({
+                    data() {
+                        return {
+                            path: "/ressources/miniPlantViews/",
+                            images: [],
+                            prices: [],
+                            names: [],
+                            qtys: [],
+                            stock:[],
+                            idplants:[],
+                            total: []
                         }
-                    }, addToCart(index) {
-                        if (this.qtys[index] ) {
-                            this.qtys[index] =Number(this.qtys[index] )+1
-                          
-
-                        } 
                     },
+                    methods: {
+                        initializeCart() {
+                            "<% cart.forEach(order => { %>"
+                            this.prices.push("<%= order.price %>")
+                            this.names.push("<%= order.name %>")
+                            this.images.push("img" + "<%= order.idplants %>" + ".1.png")
+                            this.qtys.push(Number("<%= order.quantity %>"))
+                            this.idplants.push("<%= order.idplants%>")
+                            this.stock.push("<%= order.stock %>")
+                            this.total.push(("<%= order.quantity %>"*"<%= order.price %>").toFixed(2))
+                            "<% }); %>"
+                        },
+                        updatesql(idplants,price,name,user,qty){
+                            const request = {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                idplants:idplants,
+                                price: price,
+                                name: name,
+                                user: user,
+                                qty: qty
+                        })
+                        }
+                    }
                 },
                     beforeMount() {
                         this.initializeCart()
