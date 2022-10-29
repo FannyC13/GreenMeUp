@@ -42,20 +42,20 @@
                                         <p>{{names[index]}}</p>
                                         <p class ="price">${{total[index]}}</p>
                                     </div>
-                                    <p>{{prices[index]}}</p>
+                                    <p>${{prices[index]}}</p>
                                 </div>
                                 <div class="plant-footer">
                                     <div class="quantity">
                                         Quantity
                                     </div>
                                     <div class="quantity-controller">
-                                        <div class="btn-minus" v-on:click="removeFromCart">
+                                        <div class="btn-minus" v-on:click="removeFromCart(index)">
                                             -
                                         </div>
                                         <div class="desired-quantity">
                                             {{qtys[index]}}
                                         </div>
-                                        <div class="btn-plus" v-on:click="addToCart">
+                                        <div class="btn-plus" v-on:click="addToCart(index)">
                                             +
                                         </div>
                                     </div>
@@ -130,19 +130,46 @@
                             prices: [],
                             names: [],
                             qtys: [],
+                            stock:[],
+                            idplants:[],
                             total: []
                         }
                     },
                     methods: {
                         initializeCart() {
                             "<% cart.forEach(order => { %>"
-                            this.prices.push("$<%= order.price %>")
+                            this.prices.push("<%= order.price %>")
                             this.names.push("<%= order.name %>")
                             this.images.push("img" + "<%= order.idplants %>" + ".1.png")
-                            this.qtys.push("<%= order.quantity %>")
+                            this.qtys.push(Number("<%= order.quantity %>"))
+                            this.idplants.push("<%= order.idplants%>")
+                            this.stock.push("<%= order.stock %>")
                             this.total.push(("<%= order.quantity %>"*"<%= order.price %>").toFixed(2))
                             "<% }); %>"
+                        },
+                        updatesql(idplants,price,name,user,qty){
+                            const request = {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                idplants:idplants,
+                                price: price,
+                                name: name,
+                                user: user,
+                                qty: qty
+                        })
                         }
+                        fetch("http://localhost:1010/api/client/cart", request)
+                        },
+                        removeFromCart(index){
+                           this.qtys[index]-=1
+                           this.updatesql(this.idplants[index],this.prices[index],this.names[index],"<%= client.mail%>",this.qtys[index])
+                        },
+                        addToCart(index){
+                            this.qtys[index]+=1
+                            this.updatesql(this.idplants[index],this.prices[index],this.names[index],"<%= client.mail%>",this.qtys[index])
+                        },
+                        
                     },
                     beforeMount() {
                         this.initializeCart()
