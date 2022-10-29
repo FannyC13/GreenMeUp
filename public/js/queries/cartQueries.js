@@ -30,10 +30,16 @@ const checkOrder = async (idcart, mail , idplants, price, quantity, name) => {
       }
 }
 
-
+const delElement = async(idplants,mail,idcart) => {
+  try{
+    const delEl = await db('cart').del().where({idplants:idplants, mail:mail, idcart:idcart})
+  }catch(e){
+    return e.toString()
+  }
+}
 const updateOrder = async (idcart, mail , idplants, price,quantity,name) => {
   try {
-    const create = await db('cart').update({idcart: idcart, mail :mail, idplants: idplants, price: price,quantity:quantity, name:name}).where({mail: mail, idplants: idplants})
+    const create = await db('cart').update({ mail :mail, idplants: idplants, price: price,quantity:quantity, name:name}).where({mail: mail, idplants: idplants,idcart: idcart})
     respObj = {
       status: "success",
       data: create
@@ -42,7 +48,6 @@ const updateOrder = async (idcart, mail , idplants, price,quantity,name) => {
     return respObj
     
   }catch(e){
-    console.log(e)
     respObj = {
       status: " update failed",
     }
@@ -84,3 +89,4 @@ exports.checkOrder = checkOrder;
 exports.insertOrder = insertOrder;
 exports.selectOrder = selectOrder;
 exports.checkSelect = checkSelect;
+exports.delElement= delElement;

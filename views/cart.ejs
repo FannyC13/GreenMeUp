@@ -32,9 +32,9 @@
             <section>
                 <div class="cart-container">
                     <div class="plant-container">
-                        <div class="plant-display" v-for="(image,index) in images">
-                            <div class="cross" v-on:click="test()">
-                                <img  src="/ressources/cross.png"></img>
+                        <div class="plant-display" v-for="(image,index) in images" :id = '"element"+index'>
+                            <div class="cross">
+                                <img src="/ressources/cross.png"  v-on:click="deleteElement(index)"></img>
                             </div>
                             <div class="mini-view">
                                 <img v-bind:src="path + image"></img>
@@ -163,6 +163,20 @@
                         fetch("http://localhost:1010/api/client/cart", del)
                         this.images =[],
                         this.finaltotal = 0
+                        },
+                        deleteElement(index){
+                        var id = 'element'+index
+                        document.getElementById(id).parentNode.removeChild(document.getElementById(id))
+                        const delEl = {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                user: "<%= client.mail %>",
+                                idplants: this.idplants[index],
+                                deleteEl: 1
+                            })
+                        }
+                        fetch("http://localhost:1010/api/client/cart", delEl)
                         },
                         updatetotal(prev, next){
                             this.finaltotal = this.finaltotal -prev + next
