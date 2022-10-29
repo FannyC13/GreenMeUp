@@ -8,9 +8,6 @@ const bcrypt = require('bcrypt');
 var idcart = 1;
 router.use(express.urlencoded({ extended: false }))
 
-
-
-
 router.get('/cart', async (req, res) => {
     if (userdata == null) {
         res.redirect('/')
@@ -160,8 +157,12 @@ router.post('/cart', async (req, res) => {
     } else if(req.body.delete == 1){
         idcart +=1
     }
+    else if(req.body.deleteEl ==1){
+        const del = await cartQuery.delElement(req.body.idplants, userdata.mail, idcart )
+        
+    }
     else
-    {
+    {  
         const check = cartQuery.checkOrder(idcart, req.body.user, req.body.idplants, req.body.price, req.body.qty, req.body.name)
     }
 })
