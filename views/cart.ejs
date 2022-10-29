@@ -40,7 +40,7 @@
                                 <div class="plant-header">
                                     <div class="row">
                                         <p>{{names[index]}}</p>
-                                        <p class ="price">${{total[index]}}</p>
+                                        <p class ="price">${{total[index].toFixed(2)}}</p>
                                     </div>
                                     <p>${{prices[index]}}</p>
                                 </div>
@@ -71,7 +71,7 @@
                            <div class="order-body">
                                 <div class="row">
                                     <p>Item subtotal</p>
-                                    <p class ="price">$<%= cart[0].price%></p>
+                                    <p class ="price">${{finaltotal.toFixed(2)}}</p>
                                 </div>
                                 <div class="row">
                                     <p>Shipping</p>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="row" id="total">
                                     <p>Total</p>
-                                    <p class ="price">total fee</p>
+                                    <p class ="price">total fee </p>
                                 </div>
                             </div>
                             <div class="order-footer">
@@ -132,43 +132,41 @@
                             qtys: [],
                             stock:[],
                             idplants:[],
-                            total: []
+                            total: [],
+                            finaltotal: Number(0)
                         }
                     },
                     methods: {
                         initializeCart() {
                             "<% cart.forEach(order => { %>"
-                            this.prices.push("<%= order.price %>")
+                            this.prices.push(Number("<%= order.price %>"))
                             this.names.push("<%= order.name %>")
                             this.images.push("img" + "<%= order.idplants %>" + ".1.png")
                             this.qtys.push(Number("<%= order.quantity %>"))
                             this.idplants.push("<%= order.idplants%>")
-                            this.total.push(("<%= order.quantity %>"*"<%= order.price %>").toFixed(2))
+                            this.total.push((Number("<%= order.quantity %>"*"<%= order.price %>")))
+                            this.finaltotal += (Number("<%= order.quantity %>"*"<%= order.price %>"))
                             "<% }); %>"
                         },
-                        updatesql(idplants,price,name,user,qty){
-                            const request = {
-                            method: 'POST',
-                            headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({
-                                idplants:idplants,
-                                price: price,
-                                name: name,
-                                user: user,
-                                qty: qty
-                        }),
-                        } 
-                        fetch("http://localhost:1010/api/client/cart", request)
+                        updatetotal(prev, next){
+                            this.finaltotal = this.finaltotal -prev + next
+                            
                         },
                         removeFromCart(index){
-                            if(this.qty > 1){
-                                this.qty -= 1
+
+                            if(this.qtys[index] > 1 ){
+                                this.qtys[index] -= 1
+                                var prev = this.total[index] 
+                                this.total[index] = this.qtys[index] * this.prices[index]
+                                this.updatetotal(prev, this.total[index])
+                               
                             }
-                           this.updatesql(this.idplants[index],this.prices[index],this.names[index],"<%= client.mail%>",this.qtys[index])
-                        },
+                        },                            
                         addToCart(index){
                             this.qtys[index]+=1
-                            this.updatesql(this.idplants[index],this.prices[index],this.names[index],"<%= client.mail%>",this.qtys[index])
+                            var prev = this.total[index] 
+                            this.total[index] = this.qtys[index] * this.prices[index]
+                            this.updatetotal(prev, this.total[index])
                         },
                 },
                     beforeMount() {
