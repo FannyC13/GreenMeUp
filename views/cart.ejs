@@ -82,14 +82,14 @@
                                 </div>
                                 <div class="row">
                                     <p>Tax</p>
-                                    <p class ="price">Tax fee</p>
+                                    <p class ="price">${{((finaltotal)*(0.12)).toFixed(2)}}</p>
                                 </div>
                                 <div class="line">
                                     <span class="separator"></span>
                                 </div>
                                 <div class="row" id="total">
                                     <p>Total</p>
-                                    <p class ="price">total fee </p>
+                                    <p class ="price">${{((finaltotal.toFixed(2))*(1.12)).toFixed(2)}} </p>
                                 </div>
                             </div>
                             <div class="order-footer">
@@ -164,6 +164,9 @@
                         this.images =[],
                         this.finaltotal = 0
                         },
+                        updatetotal(prev,next){
+                            this.finaltotal = this.finaltotal -prev + next   
+                        },
                         deleteElement(index){
                         var id = 'element'+index
                         document.getElementById(id).parentNode.removeChild(document.getElementById(id))
@@ -177,10 +180,7 @@
                             })
                         }
                         fetch("http://localhost:1010/api/client/cart", delEl)
-                        },
-                        updatetotal(prev, next){
-                            this.finaltotal = this.finaltotal -prev + next
-
+                        this.updatetotal(this.total[index], 0)
                         },
                         removeFromCart(index){
 
@@ -189,7 +189,6 @@
                                 var prev = this.total[index] 
                                 this.total[index] = this.qtys[index] * this.prices[index]
                                 this.updatetotal(prev, this.total[index])
-                                
                             }
                         },                            
                         addToCart(index){

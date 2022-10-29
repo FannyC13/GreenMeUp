@@ -19,6 +19,7 @@ router.get('/cart', async (req, res) => {
            if(idcart < element.idcart){
              idcart = element.idcart
            }
+           console.log(idcart)
         });
         const select = cartQuery.selectOrder(idcart, userdata.mail);
         select.then(cart => {
@@ -159,7 +160,6 @@ router.post('/cart', async (req, res) => {
     }
     else if(req.body.deleteEl ==1){
         const del = await cartQuery.delElement(req.body.idplants, userdata.mail, idcart )
-        
     }
     else
     {  
